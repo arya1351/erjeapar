@@ -9,6 +9,9 @@ use App\Http\Controllers\HrdController;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/testing', function () {
+    return view('testing');
+});
 
 Route::get('/dashboard', function () {
     return view('user.dashboard');
