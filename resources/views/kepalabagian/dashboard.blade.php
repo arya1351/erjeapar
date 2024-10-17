@@ -1,4 +1,4 @@
-@include('sidebar.admin')
+@include('sidebar.kepalabagian')
 <x-app-layout>
  <!--  Row 1 -->
  <div class="row">
