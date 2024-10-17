@@ -8,7 +8,6 @@
   <link rel="shortcut icon" type="image/png" href="{{ asset('templates')}}/assets/images/logos/favicon.png}}" />
   <link rel="stylesheet" href="{{ asset('templates')}}/src/assets/css/styles.min.css" />
 </head>
-
 <body>
   {{ $slot }}
   </section>
