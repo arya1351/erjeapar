@@ -1,6 +1,6 @@
 <title>Dashboard-User</title>
 
-@include('sidebar.user')
+@include('sidebar.pelaksana')
 
 <x-app-layout>
     <x-slot name="header">
