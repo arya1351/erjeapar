@@ -15,8 +15,8 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->string('jenis');
             $table->string('merek');
-            $table->string('no_apar');
-            $table->string('gedung')->belongs;
+            $table->string(column: 'no_apar');
+            $table->foreign('gedung_id')->references('id')->on('gedung')->onDelete('set null');
             $table->date('tangal_exp');
             $table->string('perawatan');
             $table->string('keterangan');

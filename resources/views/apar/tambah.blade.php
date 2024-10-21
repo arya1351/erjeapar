@@ -18,7 +18,12 @@
                       </div>
                       <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Lokasi</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <select name="" id="" class="form-control form-select">
+                          <option value="" class="">Pilih Lokasi</option>
+                          <option value="Pilih Lokasi" class="form control">Contoh 1</option>
+                          <option value="Pilih Lokasi" class="form control">Contoh 1</option>
+                          <option value="Pilih Lokasi" class="form control">Contoh 1</option>
+                        </select>
                       </div>
                     <div class="mb-3">
                       <label for="expired" class="form-label">Tanggal Expired</label>

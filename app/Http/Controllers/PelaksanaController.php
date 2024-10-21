@@ -13,4 +13,8 @@ class PelaksanaController extends Controller
     public function dataapar(){
         return view('pelaksana.dataapar');
     }
+
+    public function datagedung(){
+        return view('pelaksana.datagedung');
+    }
 }

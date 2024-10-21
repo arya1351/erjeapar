@@ -12,7 +12,7 @@ class GedungController extends Controller
      */
     public function index()
     {
-        //
+        return view('gedung.tambah');
     }
 
     /**
