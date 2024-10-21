@@ -12,14 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('apars', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->string('jenis');
             $table->string('merek');
             $table->string(column: 'no_apar');
-            $table->foreign('gedung_id')->references('id')->on('gedung')->onDelete('set null');
             $table->date('tangal_exp');
             $table->string('perawatan');
             $table->string('keterangan');
+            // $table->foreign('gedung_id')->references('id')->on('gedungs')->onDelete('cascade');
             $table->timestamps();
         });
     }

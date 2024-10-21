@@ -9,13 +9,36 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    You are User!.
+    <div class="row">
+      
+        <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-4 mb-3 mb-sm-0">
+                          <div class="card">
+                            <div class="card-body">
+                              <h5 class="card-title">Special title treatment</h5>
+                              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-sm-4 mb-3 mb-sm-0">
+                            <div class="card">
+                              <div class="card-body">
+                                <h5 class="card-title">Special title treatment</h5>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-sm-4 mb-3 mb-sm-0">
+                            <div class="card">
+                              <div class="card-body">
+                                <h5 class="card-title">Special title treatment</h5>
+                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                              </div>
+                            </div>
+                          </div>
+                  </div>
                 </div>
-            </div>
         </div>
     </div>
 </x-app-layout>

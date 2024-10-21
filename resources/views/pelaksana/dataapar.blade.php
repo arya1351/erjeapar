@@ -50,33 +50,58 @@
                                </div>
                              </td>
                              <td class="border-bottom-0">
-                               <button type="button" class="btn btn-outline-primary m-1">Danger</button>
-                               <button type="button" class="btn btn-outline-danger m-1">Danger</button>
-                           </td>
+                              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                                Edit
+                             </button>
+                             <!-- Button trigger modal -->
+                             <button type="button" class="btn btn-Danger" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                                Delete
+                             </button>
+                             </td>
                            </tr> 
-                           <tr>
-                            <td class="border-bottom-0"><h6 class="fw-semibold mb-0">2</h6></td>
-                            <td class="border-bottom-0">
-                                <h6 class="fw-semibold mb-1">Sunil Joshi</h6>
-                                <span class="fw-normal">Web Designer</span>                          
-                            </td>
-                            <td class="border-bottom-0">
-                              <p class="mb-0 fw-normal">Elite Admin</p>
-                            </td>
-                            <td class="border-bottom-0">
-                              <div class="d-flex align-items-center gap-2">
-                                <span class="badge bg-primary rounded-3 fw-semibold">Low</span>
-                              </div>
-                            </td>
-                            <td class="border-bottom-0">
-                              <button type="button" class="btn btn-outline-primary m-1">Danger</button>
-                              <button type="button" class="btn btn-outline-danger m-1">Danger</button>
-                          </td>
-                          </tr> 
+                         
                          </tbody>
                        </table>
                      </div>
                 
            </div>
          </div>
+
+        
+     <!-- Modal -->
+     <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
    </x-app-layout>
