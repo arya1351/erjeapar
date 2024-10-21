@@ -11,15 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('apars', function (Blueprint $table) {
+        Schema::create('gedungs', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('jenis');
-            $table->string('merek');
-            $table->string('no_apar');
-            $table->string('gedung')->belongs;
-            $table->date('tangal_exp');
-            $table->string('perawatan');
-            $table->string('keterangan');
+            $table->string('nama_gedung');
+            $table->string('image');
+            $table->string('area');
             $table->timestamps();
         });
     }
@@ -29,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('apars');
+        Schema::dropIfExists('gedungs');
     }
 };
