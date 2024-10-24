@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AparController;
+use App\Http\Controllers\GambargedungController;
 use App\Http\Controllers\GedungController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -14,9 +15,18 @@ use App\Http\Controllers\PelaksanaController;
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [PelaksanaController::class, 'index'])->name('pelaksana.dashboard');
     Route::get('/dashboard/dataapar', [PelaksanaController::class, 'dataapar'])->name('pelaksana.dataapar');
-    Route::get('/dashboard/datagedung', [PelaksanaController::class, 'datagedung'])->name('pelaksana.datagedung');
     Route::get('/dashboard/tambahapar', action: [AparController::class, 'index'])->name('apar.tambah');
-    Route::get('/dashboard/tambahgedung', action: [GedungController::class, 'index'])->name('gedung.tambah');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get(uri: '/dashboard/datagedung', action: [GambargedungController::class, 'index'])->name('pelaksana.datagedung');
+    Route::get(uri: '/dashboard/tambahgedung', action: [GambargedungController::class, 'create'])->name('gedung.tambah');
+    Route::post(uri: '/dashboard/tambahgedung', action: [GambargedungController::class, 'store'])->name('gambargedungs.store');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get(uri: '/dashboard/tambahlayout', action: [GedungController::class, 'create'])->name('layoutgedung.tambah');
+    Route::post(uri: '/dashboard/tambahlayout', action: [GedungController::class, 'store'])->name('layoutgedung.store');
 });
 
 Route::middleware('auth')->group(function () {

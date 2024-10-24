@@ -3,63 +3,58 @@
 namespace App\Http\Controllers;
 
 use App\Models\Gedung;
+use App\Models\Gambargedung;
 use Illuminate\Http\Request;
 
 class GedungController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        return view('gedung.tambah');
+        $gedungs = Gedung::with('gambargedung')->get();
+        return view('pelaksana.datagedung', compact('gedungs'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $gambargedungs = Gambargedung::all();
+        return view('layoutgedung.tambah', compact('gambargedungs'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'gambargedung_id' => 'required|exists:gambargedungs,id',
+            'nama_ruangan' => 'required|string|max:255',
+            'area' => 'required|string|max:255',
+        ]);
+
+        Gedung::create($request->all());
+
+        return redirect()->route('layoutgedung.tambah')->with('success', 'Ruangan berhasil ditambahkan.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Gedung $gedung)
-    {
-        //
-    }
+    // public function edit(Gedung $gedung)
+    // {
+    //     $gambargedungs = Gambargedung::all();
+    //     return view('gedungs.edit', compact('gedung', 'gambargedungs'));
+    // }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Gedung $gedung)
-    {
-        //
-    }
+    // public function update(Request $request, Gedung $gedung)
+    // {
+    //     $request->validate([
+    //         'gambargedung_id' => 'required|exists:gambargedungs,id',
+    //         'nama_ruangan' => 'required|string|max:255',
+    //         'area' => 'required|string|max:255',
+    //     ]);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Gedung $gedung)
-    {
-        //
-    }
+    //     $gedung->update($request->all());
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    //     return redirect()->route('gedungs.index')->with('success', 'Ruangan berhasil diperbarui.');
+    // }
+
     public function destroy(Gedung $gedung)
     {
-        //
+        $gedung->delete();
+        return redirect()->route('gedungs.index')->with('success', 'Ruangan berhasil dihapus.');
     }
 }

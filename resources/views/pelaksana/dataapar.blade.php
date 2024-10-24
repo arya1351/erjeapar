@@ -18,16 +18,28 @@
                          <thead class="text-dark fs-4">
                            <tr>
                              <th class="border-bottom-0">
-                               <h6 class="fw-semibold mb-0">Id</h6>
+                               <h6 class="fw-semibold mb-0">No Urut</h6>
                              </th>
                              <th class="border-bottom-0">
-                               <h6 class="fw-semibold mb-0">Assigned</h6>
+                               <h6 class="fw-semibold mb-0">Jenis Apar</h6>
                              </th>
                              <th class="border-bottom-0">
-                               <h6 class="fw-semibold mb-0">Name</h6>
+                               <h6 class="fw-semibold mb-0">Merek</h6>
                              </th>
                              <th class="border-bottom-0">
-                               <h6 class="fw-semibold mb-0">Priority</h6>
+                               <h6 class="fw-semibold mb-0">Lokasi</h6>
+                             </th>
+                             <th class="border-bottom-0">
+                               <h6 class="fw-semibold mb-0">No Apar</h6>
+                             </th>
+                             <th class="border-bottom-0">
+                               <h6 class="fw-semibold mb-0">Tanggal</h6>
+                             </th>
+                             <th class="border-bottom-0">
+                               <h6 class="fw-semibold mb-0">Perawatan</h6>
+                             </th>
+                             <th class="border-bottom-0">
+                               <h6 class="fw-semibold mb-0">Keterangan</h6>
                              </th>
                              <th class="border-bottom-0">
                                <h6 class="fw-semibold mb-0">Aksi</h6>
@@ -36,19 +48,30 @@
                          </thead>
                          <tbody>
                            <tr>
-                             <td class="border-bottom-0"><h6 class="fw-semibold mb-0">1</h6></td>
+                             <td class="border-bottom-0"><h6 class="fw-Bold mb-0 text-center">1</h6></td>
                              <td class="border-bottom-0">
-                                 <h6 class="fw-semibold mb-1">Sunil Joshi</h6>
-                                 <span class="fw-normal">Web Designer</span>                          
+                                 <h6 class="fw-semibold mb-1">Powder 9 Kg</h6>
                              </td>
                              <td class="border-bottom-0">
-                               <p class="mb-0 fw-normal">Elite Admin</p>
-                             </td>
+                              <h6 class="fw-semibold mb-1">Combat</h6>
+                          </td>
                              <td class="border-bottom-0">
-                               <div class="d-flex align-items-center gap-2">
-                                 <span class="badge bg-primary rounded-3 fw-semibold">Low</span>
+                               <p class="mb-0 fw-normal">Walputty</p>
+                             </td>
+                             <td class="border-bottom-0 mx-auto">
+                               <div class="d-flex align-items-center gap-2  justify-content-center">
+                                 <span class="badge bg-primary rounded-3 fw-semibold">1</span>
                                </div>
                              </td>
+                             <td class="border-bottom-0">
+                              <p class="mb-0 fw-normal">12 Juni 2025</p>
+                            </td>
+                            <td class="border-bottom-0">
+                              <p class="mb-0 fw-normal">Dibersihkan dan dibalik</p>
+                            </td>
+                            <td class="border-bottom-0">
+                              <p class="mb-0 fw-normal">Keterangan</p>
+                            </td>
                              <td class="border-bottom-0">
                               <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
                                 Edit
