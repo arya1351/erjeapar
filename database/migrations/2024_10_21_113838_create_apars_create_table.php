@@ -14,12 +14,13 @@ return new class extends Migration
         Schema::create('apars', function (Blueprint $table) {
             $table->id();
             $table->string('jenis');
+            $table->foreignId('gedung_id');
             $table->string('merek');
             $table->string(column: 'no_apar');
             $table->date('tangal_exp');
             $table->string('perawatan');
             $table->string('keterangan');
-            // $table->foreign('gedung_id')->references('id')->on('gedungs')->onDelete('cascade');
+            $table->foreign('gedung_id')->references('id')->on('gedungs')->onDelete('cascade');
             $table->timestamps();
         });
     }
