@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('gambargedung_id')->constrained('gambargedungs')->onDelete('cascade');
             $table->string('nama_ruangan');
-            $table->string('area');
+            $table->text('area');
             $table->timestamps();
         });
     }

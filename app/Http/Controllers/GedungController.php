@@ -16,21 +16,29 @@ class GedungController extends Controller
 
     public function create()
     {
-        $gambargedungs = Gambargedung::all();
-        return view('layoutgedung.tambah', compact('gambargedungs'));
-    }
+    $gambargedungs = Gambargedung::all();
+    $existingRuangan = Gedung::all(['nama_ruangan', 'gambargedung_id', 'area']);
 
+    return view('layoutgedung.tambah', [
+        'gambargedungs' => $gambargedungs,
+        'existingRuangan' => $existingRuangan->toJson() // Convert data ruangan menjadi JSON
+    ]);
+    }
     public function store(Request $request)
     {
         $request->validate([
             'gambargedung_id' => 'required|exists:gambargedungs,id',
             'nama_ruangan' => 'required|string|max:255',
-            'area' => 'required|string|max:255',
+            'area' => 'required' // Pastikan area diterima
         ]);
 
-        Gedung::create($request->all());
+        Gedung::create([
+            'gambargedung_id' => $request->gambargedung_id,
+            'nama_ruangan' => $request->nama_ruangan,
+            'area' => $request->area // Simpan data area dari canvas
+        ]);
 
-        return redirect()->route('layoutgedung.tambah')->with('success', 'Ruangan berhasil ditambahkan.');
+        return redirect()->route('layoutgedung.tambah')->with('success', 'Data ruangan berhasil disimpan.');
     }
 
     // public function edit(Gedung $gedung)
