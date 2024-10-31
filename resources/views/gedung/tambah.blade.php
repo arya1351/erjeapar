@@ -1,4 +1,4 @@
-<title>Dashboard-Data Gedung</title>
+<title>Dashboard-Tambah Gedung</title>
 
 
 
@@ -14,17 +14,23 @@
   </style>
         <div class="container-fluid">
               <div class="card">
+                @error('nama')
+                <div class="alert alert-danger" role="alert">
+                  {{ $message }}
+                </div>
+                @enderror
                 <div class="card-body">
                 <h5 class="card-title fw-semibold mb-4">Layout gedung</h5>
-                  <form>
+                <form action="{{ route('gambargedungs.store') }}" method="POST" enctype="multipart/form-data">
+                  @csrf
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Masukkan Gambar Layout Gedung</label>
-                        <input type="file" class="form-control" id="fileInput" accept="image/*" aria-describedby="FileHelp">
+                        <input type="file" name="image_gedung" class="form-control" id="fileInput" accept="image/*" aria-describedby="FileHelp">
                       </div>
                       <button type="submit" class="btn btn-primary">Submit</button>
-                      <img id="preview" src="#" alt="Image Preview" class="img-fluid mt-3 mx-auto justify-content-center">
                     </form>
-                </div>
+                    <img id="preview" src="#" alt="Image Preview" class="img-fluid mt-3 mx-auto justify-content-center">
+                  </div>
           </div>
     </div>
     <script>

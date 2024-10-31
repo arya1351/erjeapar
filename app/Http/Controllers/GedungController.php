@@ -3,63 +3,64 @@
 namespace App\Http\Controllers;
 
 use App\Models\Gedung;
+use App\Models\Gambargedung;
 use Illuminate\Http\Request;
 
 class GedungController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        return view('gedung.tambah');
+        $gedungs = Gedung::with('gambargedung')->get();
+        return view('pelaksana.datagedung', compact('gedungs'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $gambargedungs = Gambargedung::all();
+        $existingGedung = Gedung::all()->toArray(); // pastikan ini dikonversi ke array
+    
+        return view('layoutgedung.tambah', compact('gambargedungs', 'existingGedung'));
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
+    
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'gambargedung_id' => 'required|exists:gambargedungs,id',
+            'nama_ruangan' => 'required|string|max:255',
+            'area' => 'required' // Pastikan area diterima
+        ]);
+
+        Gedung::create([
+            'gambargedung_id' => $request->gambargedung_id,
+            'nama_ruangan' => $request->nama_ruangan,
+            'area' => $request->area // Simpan data area dari canvas
+        ]);
+
+        return redirect()->route('layoutgedung.tambah')->with('success', 'Data ruangan berhasil disimpan.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Gedung $gedung)
-    {
-        //
-    }
+    // public function edit(Gedung $gedung)
+    // {
+    //     $gambargedungs = Gambargedung::all();
+    //     return view('gedungs.edit', compact('gedung', 'gambargedungs'));
+    // }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Gedung $gedung)
-    {
-        //
-    }
+    // public function update(Request $request, Gedung $gedung)
+    // {
+    //     $request->validate([
+    //         'gambargedung_id' => 'required|exists:gambargedungs,id',
+    //         'nama_ruangan' => 'required|string|max:255',
+    //         'area' => 'required|string|max:255',
+    //     ]);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Gedung $gedung)
-    {
-        //
-    }
+    //     $gedung->update($request->all());
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    //     return redirect()->route('gedungs.index')->with('success', 'Ruangan berhasil diperbarui.');
+    // }
+
     public function destroy(Gedung $gedung)
     {
-        //
+        $gedung->delete();
+        return redirect()->route('gedungs.index')->with('success', 'Ruangan berhasil dihapus.');
     }
 }
