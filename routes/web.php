@@ -14,9 +14,14 @@ use App\Http\Controllers\PelaksanaController;
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [PelaksanaController::class, 'index'])->name('pelaksana.dashboard');
-    Route::get('/dashboard/dataapar', [PelaksanaController::class, 'dataapar'])->name('pelaksana.dataapar');
-    Route::get('/dashboard/tambahapar', action: [AparController::class, 'index'])->name('apar.tambah');
 });
+
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard/dataapar', [PelaksanaController::class, 'dataapar'])->name('pelaksana.dataapar');
+    Route::get('/dashboard/tambahapar', action: [AparController::class, 'create'])->name('apar.tambah');
+    Route::post(uri: '/dashboard/tambahapar', action: [AparController::class, 'store'])->name('apar.store');
+});
+
 
 Route::middleware('auth')->group(function () {
     Route::get(uri: '/dashboard/datagedung', action: [GambargedungController::class, 'index'])->name('pelaksana.datagedung');
