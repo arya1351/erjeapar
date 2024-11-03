@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Pelaksana;
+
+use App\Http\Controllers\Controller;
 
 use App\Models\Gambargedung;
 use Illuminate\Http\Request;
@@ -55,6 +57,6 @@ class GambargedungController extends Controller
     public function destroy(Gambargedung $gambargedung)
     {
         $gambargedung->delete();
-        return redirect()->route('gambargedungs.index')->with('success', 'Gambar Gedung berhasil dihapus.');
+        return redirect()->route('pelaksana.datagedung')->with('success', 'Gambar Gedung berhasil dihapus.');
     }
 }

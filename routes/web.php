@@ -1,25 +1,27 @@
 <?php
 
-use App\Http\Controllers\AparController;
-use App\Http\Controllers\GambargedungController;
-use App\Http\Controllers\GedungController;
+use App\Http\Controllers\Pelaksana\AparController;
+use App\Http\Controllers\Pelaksana\GambargedungController;
+use App\Http\Controllers\Pelaksana\GedungController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HrdController;
 use App\Http\Controllers\KepalabagianController;
-use App\Http\Controllers\PelaksanaController;
+use App\Http\Controllers\Pelaksana\PelaksanaController;
 
 
 
+// {{----------Role Pelaksana Route Start -----------}}
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [PelaksanaController::class, 'index'])->name('pelaksana.dashboard');
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard/dataapar', [PelaksanaController::class, 'dataapar'])->name('pelaksana.dataapar');
+    Route::get('/dashboard/dataapar', [AparController::class, 'index'])->name('pelaksana.dataapar');
     Route::get('/dashboard/tambahapar', action: [AparController::class, 'create'])->name('apar.tambah');
-    Route::post(uri: '/dashboard/tambahapar', action: [AparController::class, 'store'])->name('apar.store');
+    Route::post(uri: '/dashboard/tambahapar', action: [AparController::class, 'store'])->name('apars.store');
+    Route::delete('/dashboard/dataapar/{apar}', [AparController::class, 'destroy'])->name('apars.destroy');
 });
 
 
@@ -27,6 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::get(uri: '/dashboard/datagedung', action: [GambargedungController::class, 'index'])->name('pelaksana.datagedung');
     Route::get(uri: '/dashboard/tambahgedung', action: [GambargedungController::class, 'create'])->name('gedung.tambah');
     Route::post(uri: '/dashboard/tambahgedung', action: [GambargedungController::class, 'store'])->name('gambargedungs.store');
+    Route::delete('/dashboard/datagedung/{gambargedung}', [GambargedungController::class, 'destroy'])->name('gambargedungs.destroy');
 });
 
 Route::middleware('auth')->group(function () {
