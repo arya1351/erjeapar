@@ -67,21 +67,22 @@ class GambargedungController extends Controller
     //     return redirect()->route('gambargedungs.index')->with('success', 'Gambar Gedung berhasil diperbarui.');
     // }
 
-    public function destroy(Gambargedung $gambargedung ,$request): RedirectResponse      
+    public function destroy(Gambargedung $gambargedung)
     {
-        $request->authenticate();
+        // $request->authenticate();
 
-        $request->session()->regenerate();
+        // $request->session()->regenerate();
+
         $gambargedung->delete();
-        // return redirect()->route('pelaksana.datagedung')->with('success', 'Gambar Gedung berhasil dihapus.');
-        $url = "pelaksana/datagedung";
+        return redirect()->route('pelaksana.datagedung')->with('success', 'Gambar Gedung berhasil dihapus.');
+        // $url = "pelaksana/datagedung";
 
-        if ($request->user()->role == "hrd") {
-            $url = "hrd/datagedung";
-        } else if($request->user()->role == "kepalabagian"){
-            $url = "kepalabagian/datagedung";
-        }
+        // if ($request->user()->role == "hrd") {
+        //     $url = "hrd/datagedung";
+        // } else if($request->user()->role == "kepalabagian"){
+        //     $url = "kepalabagian/datagedung";
+        // }
 
-        return redirect()->intended($url);
+        // return redirect()->intended($url);
     }
 }

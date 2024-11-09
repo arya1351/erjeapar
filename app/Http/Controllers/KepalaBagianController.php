@@ -10,7 +10,5 @@ class KepalaBagianController extends Controller
     {
         return view('kepalabagian.dashboard');
     }
-    public function operatortable(){
-        return view('kepalabagian.operatortable');
-    }
+   
 }

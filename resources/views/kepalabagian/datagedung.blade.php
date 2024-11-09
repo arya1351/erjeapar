@@ -1,57 +1,60 @@
 @extends('layouts.app')
 @section('sidebar')
-<!-- Sidebar Start -->
-<aside class="left-sidebar">
-  <!-- Sidebar scroll-->
-  <div>
-    <div class="brand-logo d-flex align-items-center justify-content-between">
-        <a href="./index.html" class="text-nowrap logo-img justify-content-center mx-auto">
-            <img src="{{ asset('templates')}}/src/assets/images/logos/logoRJ.png" width="180" alt="" />
-        </a>
-      <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
-        <i class="ti ti-x fs-8"></i>
-      </div>
-    </div>
-    <!-- Sidebar navigation-->
-    <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
-      <ul id="sidebarnav">
-        <li class="nav-small-cap">
-          <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-          <span class="hide-menu">Home</span>
-        </li>
-        <li class="sidebar-item">
-          <a class="sidebar-link" href="{{ route('kepalabagian.dashboard') }}" aria-expanded="false">
-            <span>
-              <i class="ti ti-layout-dashboard"></i>
-            </span>
-            <span class="hide-menu">Dashboard</span>
-          </a>
-        </li>
-        <li class="nav-small-cap">
-          <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-          <span class="hide-menu">Data Master</span>
-      </li>
-      <li class="sidebar-item">
-          <a class="sidebar-link" href="{{ route('kepalabagian.dataapar') }}" aria-expanded="false">
-              <span>
-                  <i class="ti ti-article"></i>
-              </span>
-              <span class="hide-menu">Data Apar</span>
-          </a>
-      </li>
-      <li class="sidebar-item">
-          <a class="sidebar-link" href="{{ route('kepalabagian.datagedung') }}" aria-expanded="false">
-              <span>
-                  <i class="ti ti-building"></i>
-              </span>
-              <span class="hide-menu">Data Gedung</span>
-          </a>
-      </li>
-    </nav>
-    <!-- End Sidebar navigation -->
-  </div>
-  <!-- End Sidebar scroll-->
-</aside>
+    <!-- Sidebar Start -->
+    <aside class="left-sidebar">
+        <!-- Sidebar scroll-->
+        <div>
+            <div class="brand-logo d-flex align-items-center justify-content-between mx-auto row">
+                <a href="{{ route('kepalabagian.dashboard') }}" class="text-nowrap logo-img justify-content-center mx-auto">
+                    <img src="{{ asset('templates') }}/src/assets/images/logos/logoRJ.png" width="180" alt="" />
+                </a>
+                <a href="{{ route('kepalabagian.dashboard') }}" class="text-center text-black fs-6 fw-bolder">
+                    Monitoring Apar
+                </a>
+                <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
+                    <i class="ti ti-x fs-8"></i>
+                </div>
+            </div>
+            <!-- Sidebar navigation-->
+            <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
+                <ul id="sidebarnav">
+                    <li class="nav-small-cap">
+                        <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                        <span class="hide-menu">Home</span>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('kepalabagian.dashboard') }}" aria-expanded="false">
+                            <span>
+                                <i class="ti ti-layout-dashboard"></i>
+                            </span>
+                            <span class="hide-menu">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-small-cap">
+                        <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                        <span class="hide-menu">Data Master</span>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('kepalabagian.dataapar') }}" aria-expanded="false">
+                            <span>
+                                <i class="ti ti-article"></i>
+                            </span>
+                            <span class="hide-menu">Data Apar</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('kepalabagian.datagedung') }}" aria-expanded="false">
+                            <span>
+                                <i class="ti ti-building"></i>
+                            </span>
+                            <span class="hide-menu">Data Gedung</span>
+                        </a>
+                    </li>
+            </nav>
+            <!-- End Sidebar navigation -->
+        </div>
+        <!-- End Sidebar scroll-->
+    </aside>
 @endsection
 
 @section('content')
@@ -105,7 +108,7 @@
                                                 Edit
                                             </button>
                                             <!-- Button trigger modal -->
-                                            <button type="button" class="btn btn-Danger" data-bs-toggle="modal"
+                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                                 data-bs-target="#deleteModal">
                                                 Delete
                                             </button>
@@ -288,4 +291,4 @@
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-@endsection
+    @endsection

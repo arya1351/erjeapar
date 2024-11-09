@@ -44,6 +44,8 @@ Route::middleware(['auth', 'role:kepalabagian'])->group(function () {
     Route::get('/kepalabagian/dashboard', [KepalabagianController::class, 'dashboard'])->name('kepalabagian.dashboard');
     Route::get('/kepalabagian/dataapar', [AparController::class, 'kepalabagian'])->name('kepalabagian.dataapar');
     Route::get('/kepalabagian/datagedung', [GambargedungController::class, 'kepalabagian'])->name('kepalabagian.datagedung');
+
+
 });
 // {{----------Role Kepala Bagian Route End -----------}}
 

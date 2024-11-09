@@ -1,4 +1,4 @@
-<title>Dashboard-Data Apar</title>
+<title>Pelaksana-Data Apar</title>
 
 @extends('layouts.app')
 @section('sidebar')
@@ -6,9 +6,12 @@
     <aside class="left-sidebar">
         <!-- Sidebar scroll-->
         <div>
-            <div class="brand-logo d-flex align-items-center justify-content-between">
-                <a href="./index.html" class="text-nowrap logo-img justify-content-center mx-auto">
-                    <img src="{{ asset('templates')}}/src/assets/images/logos/logoRJ.png" width="180" alt="" />
+            <div class="brand-logo d-flex align-items-center justify-content-between mx-auto row">
+                <a href="{{ route('pelaksana.dashboard') }}" class="text-nowrap logo-img justify-content-center mx-auto">
+                    <img src="{{ asset('templates') }}/src/assets/images/logos/logoRJ.png" width="180" alt="" />
+                </a>
+                <a href="{{ route('pelaksana.dashboard') }}" class="text-center text-black fs-6 fw-bolder">
+                    Monitoring Apar
                 </a>
                 <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
                     <i class="ti ti-x fs-8"></i>
@@ -104,75 +107,83 @@
                             </thead>
                             <tbody>
                                 <?php
-                                    $no = 1;
+                                $no = 1;
                                 ?>
                                 @foreach ($apars as $apar)
-                                <tr>
-                                    <td class="border-bottom-0">
-                                        <h6 class="fw-Bold mb-0 text-center">{{ $no++ }}</h6>
-                                    </td>
-                                    <td class="border-bottom-0">
-                                    <h6 class="fw-semibold mb-1 d-inline-block text-truncate" style="max-width: 100px;">{{ $apar->jenis }}</h6>
-                                    </td>
-                                    <td class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-1 d-inline-block text-truncate" style="max-width: 100px;">{{ $apar->merek }}</h6>
-                                    </td>
-                                    <td class="border-bottom-0">
-                                        <!-- Mengakses nama_ruangan melalui relasi gedung -->
-                                        <p class="mb-0 fw-normal">{{ $apar->gedungs->nama_ruangan ?? 'N/A' }}</p>
-                                    </td>
-                                    <td class="border-bottom-0 mx-auto">
-                                        <div class="d-flex align-items-center gap-2  justify-content-center">
-                                            <span class="badge bg-primary rounded-3 fw-semibold">{{ $apar->no_apar }}</span>
-                                        </div>
-                                    </td>
-                                    <td class="border-bottom-0">
-                                        <p class="mb-0 fw-normal">{{ $apar->tanggal_exp }}</p>
-                                    </td>
-                                    <td class="border-bottom-0">
-                                        <p class="mb-0 fw-normal d-inline-block text-truncate" style="max-width: 100px;">{{ $apar->perawatan }}</p>
-                                    </td>
-                                    <td class="border-bottom-0">
-                                        <p class="mb-0 fw-normal d-inline-block text-truncate" style="max-width: 100px;">{{ $apar->keterangan }}</p>
-                                    </td>
-                                    <td class="border-bottom-0 d-inline-flex gap-1">
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                            data-bs-target="#exampleModal1">
-                                            Edit
-                                        </button>
-                                        <!-- Button trigger modal -->
+                                    <tr>
+                                        <td class="border-bottom-0">
+                                            <h6 class="fw-Bold mb-0 text-center">{{ $no++ }}</h6>
+                                        </td>
+                                        <td class="border-bottom-0">
+                                            <h6 class="fw-semibold mb-1 d-inline-block text-truncate"
+                                                style="max-width: 100px;">{{ $apar->jenis }}</h6>
+                                        </td>
+                                        <td class="border-bottom-0">
+                                            <h6 class="fw-semibold mb-1 d-inline-block text-truncate"
+                                                style="max-width: 100px;">{{ $apar->merek }}</h6>
+                                        </td>
+                                        <td class="border-bottom-0">
+                                            <!-- Mengakses nama_ruangan melalui relasi gedung -->
+                                            <p class="mb-0 fw-normal">{{ $apar->gedungs->nama_ruangan ?? 'N/A' }}</p>
+                                        </td>
+                                        <td class="border-bottom-0 mx-auto">
+                                            <div class="d-flex align-items-center gap-2  justify-content-center">
+                                                <span
+                                                    class="badge bg-primary rounded-3 fw-semibold">{{ $apar->no_apar }}</span>
+                                            </div>
+                                        </td>
+                                        <td class="border-bottom-0">
+                                            <p class="mb-0 fw-normal">{{ $apar->tanggal_exp }}</p>
+                                        </td>
+                                        <td class="border-bottom-0">
+                                            <p class="mb-0 fw-normal d-inline-block text-truncate"
+                                                style="max-width: 100px;">{{ $apar->perawatan }}</p>
+                                        </td>
+                                        <td class="border-bottom-0">
+                                            <p class="mb-0 fw-normal d-inline-block text-truncate"
+                                                style="max-width: 100px;">{{ $apar->keterangan }}</p>
+                                        </td>
+                                        <td class="border-bottom-0 d-inline-flex gap-1">
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                data-bs-target="#exampleModal1">
+                                                Edit
+                                            </button>
+                                            <!-- Button trigger modal -->
                                             <button type="submit" class="btn btn-Danger" data-bs-toggle="modal"
-                                            data-bs-target="#exampleModal{{ $apar->id }}">
-                                            Delete
-                                        </button>
-                                    </td>
-                                </tr>
+                                                data-bs-target="#exampleModal{{ $apar->id }}">
+                                                Delete
+                                            </button>
+                                        </td>
+                                    </tr>
 
-                                <div class="modal fade" id="exampleModal{{ $apar->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
-                                    aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                               <p>Apa kamu yakin ingin menghapus Apar dengan nomer apar {{ $apar->no_apar }}</p>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <form action="{{ route('apars.destroy', $apar->id) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-Danger">
-                                                    Delete
-                                                </button>
-                                                </form>
+                                    <div class="modal fade" id="exampleModal{{ $apar->id }}" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Apa kamu yakin ingin menghapus Apar dengan nomer apar
+                                                        {{ $apar->no_apar }}</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Close</button>
+                                                    <form action="{{ route('apars.destroy', $apar->id) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-Danger">
+                                                            Delete
+                                                        </button>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
                                 @endforeach
                             </tbody>
                         </table>
@@ -202,6 +213,4 @@
                     </div>
                 </div>
             </div>
-
-            
         @endsection

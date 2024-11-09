@@ -1,60 +1,60 @@
 <title>Dashboard-Tambah Gedung</title>
 
-@extends('layouts.app')    
+@extends('layouts.app')
 @section('sidebar')
-<!-- Sidebar Start -->
-<aside class="left-sidebar">
-  <!-- Sidebar scroll-->
-  <div>
-    <div class="brand-logo d-flex align-items-center justify-content-between">
-      <a href="./index.html" class="text-nowrap logo-img">
-        <img src="{{ asset('templates')}}/src/assets/images/logos/dark-logo.svg" width="180" alt="" />
-      </a>
-      <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
-        <i class="ti ti-x fs-8"></i>
-      </div>
-    </div>
-    <!-- Sidebar navigation-->
-    <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
-      <ul id="sidebarnav">
-        <li class="nav-small-cap">
-          <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-          <span class="hide-menu">Home</span>
-        </li>
-        <li class="sidebar-item">
-          <a class="sidebar-link" href="{{ route('pelaksana.dashboard') }}" aria-expanded="false">
-            <span>
-              <i class="ti ti-layout-dashboard"></i>
-            </span>
-            <span class="hide-menu">Dashboard</span>
-          </a>
-        </li>
-        <li class="nav-small-cap">
-          <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-          <span class="hide-menu">Data Master</span>
-        </li>
-        <li class="sidebar-item">
-          <a class="sidebar-link" href="{{ route('pelaksana.dataapar') }}" aria-expanded="false">
-            <span>
-              <i class="ti ti-article"></i>
-            </span>
-            <span class="hide-menu">Data Apar</span>
-          </a>
-        </li>
-        <li class="sidebar-item">
-          <a class="sidebar-link" href="{{ route('pelaksana.datagedung') }}" aria-expanded="false">
-            <span>
-              <i class="ti ti-building"></i>
-            </span>
-            <span class="hide-menu">Data Gedung</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
-    <!-- End Sidebar navigation -->
-  </div>
-  <!-- End Sidebar scroll-->
-</aside>
+    <!-- Sidebar Start -->
+    <aside class="left-sidebar">
+        <!-- Sidebar scroll-->
+        <div>
+            <div class="brand-logo d-flex align-items-center justify-content-between">
+                <a href="./index.html" class="text-nowrap logo-img">
+                    <img src="{{ asset('templates') }}/src/assets/images/logos/dark-logo.svg" width="180" alt="" />
+                </a>
+                <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
+                    <i class="ti ti-x fs-8"></i>
+                </div>
+            </div>
+            <!-- Sidebar navigation-->
+            <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
+                <ul id="sidebarnav">
+                    <li class="nav-small-cap">
+                        <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                        <span class="hide-menu">Home</span>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('pelaksana.dashboard') }}" aria-expanded="false">
+                            <span>
+                                <i class="ti ti-layout-dashboard"></i>
+                            </span>
+                            <span class="hide-menu">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-small-cap">
+                        <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                        <span class="hide-menu">Data Master</span>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('pelaksana.dataapar') }}" aria-expanded="false">
+                            <span>
+                                <i class="ti ti-article"></i>
+                            </span>
+                            <span class="hide-menu">Data Apar</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('pelaksana.datagedung') }}" aria-expanded="false">
+                            <span>
+                                <i class="ti ti-building"></i>
+                            </span>
+                            <span class="hide-menu">Data Gedung</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- End Sidebar navigation -->
+        </div>
+        <!-- End Sidebar scroll-->
+    </aside>
 @endsection
 
 
@@ -66,7 +66,7 @@
         <label for="gambargedung_id">Pilih Gambar Gedung:</label>
         <select name="gambargedung_id" id="gambargedung_id" onchange="loadGedungImage()">
             <option value="">Pilih Gambar Gedung</option>
-            @foreach($gambargedungs as $gambargedung)
+            @foreach ($gambargedungs as $gambargedung)
                 <option value="{{ $gambargedung->id }}" data-image="{{ asset('images/' . $gambargedung->image_gedung) }}">
                     Gambar ID: {{ $gambargedung->id }}
                 </option>
@@ -83,7 +83,9 @@
         <button type="submit" onclick="saveCanvas()">Simpan</button>
     </form>
 
-    <div id="tooltip" style="position: absolute; padding: 5px; background: rgba(0, 0, 0, 0.7); color: #fff; border-radius: 4px; display: none;"></div>
+    <div id="tooltip"
+        style="position: absolute; padding: 5px; background: rgba(0, 0, 0, 0.7); color: #fff; border-radius: 4px; display: none;">
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script>
     <script>
@@ -99,10 +101,16 @@
                 fabric.Image.fromURL(imageSrc, function(img) {
                     img.scaleToWidth(canvas.width);
                     img.scaleToHeight(canvas.height);
-                    img.set({ left: 0, top: 0, selectable: false });
+                    img.set({
+                        left: 0,
+                        top: 0,
+                        selectable: false
+                    });
                     canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas));
                     showExistingMarkers();
-                }, { crossOrigin: 'anonymous' });
+                }, {
+                    crossOrigin: 'anonymous'
+                });
             } else {
                 canvas.setBackgroundImage(null, canvas.renderAll.bind(canvas));
             }
