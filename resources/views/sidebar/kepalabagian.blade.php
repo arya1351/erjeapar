@@ -1,4 +1,7 @@
- <!-- Sidebar Start -->
+@extends('layouts.app')
+
+@section('sidebar')
+<!-- Sidebar Start -->
  <aside class="left-sidebar">
     <!-- Sidebar scroll-->
     <div>
@@ -63,4 +66,4 @@
     <!-- End Sidebar scroll-->
   </aside>
 
-  
+@endsection
