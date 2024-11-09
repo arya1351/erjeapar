@@ -6,11 +6,16 @@
     <aside class="left-sidebar">
         <!-- Sidebar scroll-->
         <div>
-            <div class="brand-logo d-flex align-items-center justify-content-between">
-                <a href="./index.html" class="text-nowrap logo-img">
-                    <img src="{{ asset('templates') }}/src/assets/images/logos/dark-logo.svg" width="180" alt="" />
+            <div class="brand-logo d-flex align-items-center justify-content-between row">
+                <a href="/" class="text-nowrap logo-img justify-content-center mx-auto">
+                    <img src="{{ asset('templates')}}/src/assets/images/logos/logoRJ.png" width="180" alt="" />
                 </a>
-                <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
+                <div class="row">
+                <a href="{{ route('pelaksana.dashboard') }}" class="text-center text-gray-900 fs-6 fw-bolder">
+                    Monitoring Apar
+                  </a>
+                </div>
+                  <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
                     <i class="ti ti-x fs-8"></i>
                 </div>
             </div>
@@ -64,27 +69,39 @@
                 <div class="col-sm-4 mb-3 mb-sm-0">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Special title treatment</h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <h1 class="m-2">100</h1>
+                            <h3 class="m-2">Total Apar</h3>
+                            {{-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> --}}
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-4 mb-3 mb-sm-0">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Special title treatment</h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <h1 class="m-2">100</h1>
+                            <h3 class="m-2">Total Gedung</h3>
+                            {{-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> --}}
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-4 mb-3 mb-sm-0">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Special title treatment</h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <h1 class="m-2">100</h1>
+                            <h3 class="m-2">Total </h3>
+                            {{-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> --}}
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="">
+                        <div class="">
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

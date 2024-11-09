@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="shortcut icon" type="image/png" href="{{ asset('/assets/images/logos/favicon.png')}}" />
+  <link rel="shortcut icon" type="image/png" href="{{ asset('/assets/images/logos/logoRJ.png')}}" />
   <link rel="stylesheet" href="{{ asset('templates')}}/src/assets/css/styles.min.css" />
 </head>
 
