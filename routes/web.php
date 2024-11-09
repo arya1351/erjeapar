@@ -1,40 +1,33 @@
 <?php
 
-use App\Http\Controllers\Pelaksana\AparController;
-use App\Http\Controllers\Pelaksana\GambargedungController;
-use App\Http\Controllers\Pelaksana\GedungController;
+use App\Http\Controllers\AparController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HrdController;
 use App\Http\Controllers\KepalabagianController;
-use App\Http\Controllers\Pelaksana\PelaksanaController;
 
 
+use App\Http\Controllers\GambargedungController;
+use App\Http\Controllers\GedungController;
+use App\Http\Controllers\PelaksanaController;
 
 // {{----------Role Pelaksana Route Start -----------}}
-Route::middleware('auth')->group(function () {
+
+Route::middleware(['auth', 'role:pelaksana'])->group(function () {
     Route::get('/dashboard', [PelaksanaController::class, 'index'])->name('pelaksana.dashboard');
-});
-
-Route::middleware('auth')->group(function () {
-    Route::get('/dashboard/dataapar', [AparController::class, 'index'])->name('pelaksana.dataapar');
-    Route::get('/dashboard/tambahapar', action: [AparController::class, 'create'])->name('apar.tambah');
-    Route::post(uri: '/dashboard/tambahapar', action: [AparController::class, 'store'])->name('apars.store');
+    Route::get('/dashboard/dataapar', [AparController::class, 'pelaksana'])->name('pelaksana.dataapar');
+    Route::get('/dashboard/tambahapar', [AparController::class, 'create'])->name('apar.tambah');
+    Route::post('/dashboard/tambahapar', [AparController::class, 'store'])->name('apars.store');
     Route::delete('/dashboard/dataapar/{apar}', [AparController::class, 'destroy'])->name('apars.destroy');
-});
 
-
-Route::middleware('auth')->group(function () {
-    Route::get(uri: '/dashboard/datagedung', action: [GambargedungController::class, 'index'])->name('pelaksana.datagedung');
-    Route::get(uri: '/dashboard/tambahgedung', action: [GambargedungController::class, 'create'])->name('gedung.tambah');
-    Route::post(uri: '/dashboard/tambahgedung', action: [GambargedungController::class, 'store'])->name('gambargedungs.store');
+    Route::get('/dashboard/datagedung', [GambargedungController::class, 'pelaksana'])->name('pelaksana.datagedung');
+    Route::get('/dashboard/tambahgedung', [GambargedungController::class, 'create'])->name('gedung.tambah');
+    Route::post('/dashboard/tambahgedung', [GambargedungController::class, 'store'])->name('gambargedungs.store');
     Route::delete('/dashboard/datagedung/{gambargedung}', [GambargedungController::class, 'destroy'])->name('gambargedungs.destroy');
-});
 
-Route::middleware('auth')->group(function () {
-    Route::get(uri: '/dashboard/tambahlayout', action: [GedungController::class, 'create'])->name('layoutgedung.tambah');
-    Route::post(uri: '/dashboard/tambahlayout', action: [GedungController::class, 'store'])->name('layoutgedung.store');
+    Route::get('/dashboard/tambahlayout', [GedungController::class, 'create'])->name('layoutgedung.tambah');
+    Route::post('/dashboard/tambahlayout', [GedungController::class, 'store'])->name('layoutgedung.store');
 });
 
 Route::middleware('auth')->group(function () {
@@ -43,13 +36,26 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware(['auth', 'role:kepalabagian'])->group(function(){
+// {{----------Role Pelaksana Route End -----------}}
+
+// {{----------Role Kepala Bagian Route Start -----------}}
+
+Route::middleware(['auth', 'role:kepalabagian'])->group(function () {
     Route::get('/kepalabagian/dashboard', [KepalabagianController::class, 'dashboard'])->name('kepalabagian.dashboard');
-    Route::get('/kepalabagian/operatortable', [KepalabagianController::class, 'operatortable'])->name('kepalabagian.operatortable');
+    Route::get('/kepalabagian/dataapar', [AparController::class, 'kepalabagian'])->name('kepalabagian.dataapar');
+    Route::get('/kepalabagian/datagedung', [GambargedungController::class, 'kepalabagian'])->name('kepalabagian.datagedung');
+});
+// {{----------Role Kepala Bagian Route End -----------}}
+
+// {{----------Role HRD Route Start -----------}}
+
+Route::middleware(['auth', 'role:hrd'])->group(function () {
+    Route::get('/hrd/dashboard', [HrdController::class, 'dashboard'])->name('hrd.dashboard');
+    Route::get('/hrd/dataapar', [AparController::class, 'hrd'])->name('hrd.dataapar');
+    Route::get('/hrd/datagedung', [GambargedungController::class, 'hrd'])->name('hrd.datagedung');
 });
 
-Route::middleware(['auth', 'role:hrd'])->group(function(){
-    Route::get('/hrd/dashboard', [HrdController::class, 'dashboard'])->name('hrd.dashboard');
-});
+// {{----------Role HRD Route End -----------}}
+
 
 require __DIR__.'/auth.php';

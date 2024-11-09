@@ -1,18 +1,31 @@
 <?php
 
-namespace App\Http\Controllers\Pelaksana;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 
 use App\Models\Gambargedung;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class GambargedungController extends Controller
 {
-    public function index()
+    public function pelaksana()
     {
         $gambargedungs = Gambargedung::all();
         return view('pelaksana.datagedung', compact('gambargedungs'));
+    }
+
+    public function kepalabagian()
+    {
+        $gambargedungs = Gambargedung::all();
+        return view('kepalabagian.datagedung', compact('gambargedungs'));
+    }
+
+    public function hrd()
+    {
+        $gambargedungs = Gambargedung::all();
+        return view('hrd.datagedung', compact('gambargedungs'));
     }
 
     public function create()
@@ -54,9 +67,21 @@ class GambargedungController extends Controller
     //     return redirect()->route('gambargedungs.index')->with('success', 'Gambar Gedung berhasil diperbarui.');
     // }
 
-    public function destroy(Gambargedung $gambargedung)
+    public function destroy(Gambargedung $gambargedung ,$request): RedirectResponse      
     {
+        $request->authenticate();
+
+        $request->session()->regenerate();
         $gambargedung->delete();
-        return redirect()->route('pelaksana.datagedung')->with('success', 'Gambar Gedung berhasil dihapus.');
+        // return redirect()->route('pelaksana.datagedung')->with('success', 'Gambar Gedung berhasil dihapus.');
+        $url = "pelaksana/datagedung";
+
+        if ($request->user()->role == "hrd") {
+            $url = "hrd/datagedung";
+        } else if($request->user()->role == "kepalabagian"){
+            $url = "kepalabagian/datagedung";
+        }
+
+        return redirect()->intended($url);
     }
 }

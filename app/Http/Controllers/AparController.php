@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Pelaksana;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Apar;
@@ -11,12 +11,25 @@ use Illuminate\Http\Request;
 class AparController extends Controller
 {
     
-    public function index(){
+    public function pelaksana(){
         $apars = Apar::with('gedungs')->get();
 
         return view('pelaksana.dataapar', compact('apars'));
     }
     
+
+    public function hrd(){
+        $apars = Apar::with('gedungs')->get();
+
+        return view('hrd.dataapar', compact('apars'));
+    }
+   
+    public function kepalabagian(){
+        $apars = Apar::with('gedungs')->get();
+
+        return view('kepalabagian.dataapar', compact('apars'));
+    }
+
     public function create()
     {
         $gedungs = Gedung::all();

@@ -19,7 +19,7 @@ class AuthenticatedSessionController extends Controller
         return view('auth.login');
     }
 
-    /**
+      /**
      * Handle an incoming authentication request.
      */
     public function store(LoginRequest $request): RedirectResponse
@@ -30,10 +30,10 @@ class AuthenticatedSessionController extends Controller
 
         $url = "dashboard";
 
-        if ($request->user()->role == "kepalabagian") {
-            $url = "kepalabagian/dashboard";
-        } else if($request->user()->role == "hrd"){
+        if ($request->user()->role == "hrd") {
             $url = "hrd/dashboard";
+        } else if($request->user()->role == "kepalabagian"){
+            $url = "kepalabagian/dashboard";
         }
 
         return redirect()->intended($url);
@@ -50,6 +50,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/login');
     }
 }

@@ -1,33 +1,89 @@
-@include('sidebar.kepalabagian')
-<x-app-layout>
- <!--  Row 1 -->
- <div class="row">
-   
-      <div class="col">
-        <div class="col-lg">
-          <!-- Yearly Breakup -->
-          <div class="card overflow-hidden">
-            <div class="card-body">
-              <div class="mb-3">
-                <label for="select" class="form-label">Disabled select menu</label>
-                <select id="select" class="form-select">
-                  <option>Gedung 1</option>
-                  <option>Gedung 2</option>
-                  <option>Gedung 3</option>
-                  <option>Gedung 4</option>
-                </select>
-              </div>
-              <div class="position-relative d-flex">
-              <img src="https://i.pinimg.com/564x/c8/d9/93/c8d9936f4bf774498d13229d95e8d172.jpg" style="width:24rem;" class="card-img-top p-4 rounded align-items-center justify-content-center" alt="...">
-              </div>
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                the
-                card's content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-        </div>
+@extends('layouts.app')
+@section('sidebar')
+<!-- Sidebar Start -->
+<aside class="left-sidebar">
+  <!-- Sidebar scroll-->
+  <div>
+    <div class="brand-logo d-flex align-items-center justify-content-between">
+      <a href="./index.html" class="text-nowrap logo-img">
+        <img src="{{ asset('templates')}}/src/assets/images/logos/dark-logo.svg" width="180" alt="" />
+      </a>
+      <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
+        <i class="ti ti-x fs-8"></i>
       </div>
     </div>
-</x-app-layout>
+    <!-- Sidebar navigation-->
+    <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
+      <ul id="sidebarnav">
+        <li class="nav-small-cap">
+          <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+          <span class="hide-menu">Home</span>
+        </li>
+        <li class="sidebar-item">
+          <a class="sidebar-link" href="{{ route('kepalabagian.dashboard') }}" aria-expanded="false">
+            <span>
+              <i class="ti ti-layout-dashboard"></i>
+            </span>
+            <span class="hide-menu">Dashboard</span>
+          </a>
+        </li>
+        <li class="nav-small-cap">
+          <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+          <span class="hide-menu">Data Master</span>
+      </li>
+      <li class="sidebar-item">
+          <a class="sidebar-link" href="{{ route('kepalabagian.dataapar') }}" aria-expanded="false">
+              <span>
+                  <i class="ti ti-article"></i>
+              </span>
+              <span class="hide-menu">Data Apar</span>
+          </a>
+      </li>
+      <li class="sidebar-item">
+          <a class="sidebar-link" href="{{ route('kepalabagian.datagedung') }}" aria-expanded="false">
+              <span>
+                  <i class="ti ti-building"></i>
+              </span>
+              <span class="hide-menu">Data Gedung</span>
+          </a>
+      </li>
+    </nav>
+    <!-- End Sidebar navigation -->
+  </div>
+  <!-- End Sidebar scroll-->
+</aside>
+@endsection
+
+@section('content')
+<div class="row">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-4 mb-3 mb-sm-0">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Special title treatment</h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 mb-3 mb-sm-0">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Special title treatment</h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 mb-3 mb-sm-0">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Special title treatment</h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+@endsection
