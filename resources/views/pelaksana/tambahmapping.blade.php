@@ -72,7 +72,7 @@
 @section('content')
     <h1>Tambah Gedung</h1>
 
-    <form action="{{ route('layoutgedung.store') }}" method="POST">
+    <form action="{{ route('mapping.store') }}" method="POST">
         @csrf
         <label for="gambargedung_id">Pilih Gambar Gedung:</label>
         <select name="gambargedung_id" id="gambargedung_id" onchange="loadGedungImage()">

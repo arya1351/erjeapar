@@ -2,6 +2,7 @@
 
 @extends('layouts.app')
 @section('sidebar')
+    <!-- Sidebar Start -->
     <aside class="left-sidebar">
         <!-- Sidebar scroll-->
         <div>
@@ -23,7 +24,7 @@
                         <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                         <span class="hide-menu">Home</span>
                     </li>
-                    <li class="sidebar-item">
+                    <li class="sidebar-item {{ Request::is('hrd/dashboard') ? 'active' : '' }}">
                         <a class="sidebar-link" href="{{ route('hrd.dashboard') }}" aria-expanded="false">
                             <span>
                                 <i class="ti ti-layout-dashboard"></i>
@@ -38,19 +39,28 @@
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="{{ route('hrd.dataapar') }}" aria-expanded="false">
                             <span>
-                                <i class="ti ti-article"></i>
+                                <i class="ti ti-fire-extinguisher"></i>
                             </span>
                             <span class="hide-menu">Mengelola Data Apar</span>
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="{{ route('hrd.datagedung') }}" aria-expanded="false">
+                        <a class="sidebar-link" href="{{ route('hrd.datamapping') }}" aria-expanded="false">
                             <span>
                                 <i class="ti ti-building"></i>
                             </span>
                             <span class="hide-menu">Mapping Apar</span>
                         </a>
                     </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="#" aria-expanded="false">
+                            <span>
+                                <i class="ti ti-article"></i>
+                            </span>
+                            <span class="hide-menu">Laporan</span>
+                        </a>
+                    </li>
+                </ul>
             </nav>
             <!-- End Sidebar navigation -->
         </div>

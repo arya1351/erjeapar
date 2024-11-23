@@ -11,18 +11,14 @@ use Illuminate\Http\Request;
 class AparController extends Controller
 {
     
-    public function pelaksana(){
-        $apars = Apar::with('gedungs')->get();
+    // public function pelaksana(){
+    //     $apars = Apar::with('gedungs')->get();
 
-        return view('pelaksana.dataapar', compact('apars'));
-    }
+    //     return view('pelaksana.dataapar', compact('apars'));
+    // }
     
 
-    public function hrd(){
-        $apars = Apar::with('gedungs')->get();
 
-        return view('hrd.dataapar', compact('apars'));
-    }
    
     public function kepalabagian(){
         $apars = Apar::with('gedungs')->get();
@@ -30,29 +26,29 @@ class AparController extends Controller
         return view('kepalabagian.dataapar', compact('apars'));
     }
 
-    public function create()
-    {
-        $gedungs = Gedung::all();
+    // public function create()
+    // {
+    //     $gedungs = Gedung::all();
 
-        return view('apar.tambah', compact('gedungs'));
-    }
-    public function store(Request $request): RedirectResponse
-    {
-        // dd($request->all());
-        $request->validate([
-            'jenis' => 'required|string|max:255',
-            'merek' => 'nullable|string|max:255',
-            'gedung_id' => 'required|exists:gedungs,id',
-            'no_apar' => 'required|string|max:255',
-            'tanggal_exp' => 'required|date',
-            'perawatan' => 'nullable|string|max:255',
-            'keterangan' => 'nullable|string|max:255',
-        ]);
+    //     return view('apar.tambah', compact('gedungs'));
+    // }
+    // public function store(Request $request): RedirectResponse
+    // {
+    //     // dd($request->all());
+    //     $request->validate([
+    //         'jenis' => 'required|string|max:255',
+    //         'merek' => 'nullable|string|max:255',
+    //         'gedung_id' => 'required|exists:gedungs,id',
+    //         'no_apar' => 'required|string|max:255',
+    //         'tanggal_exp' => 'required|date',
+    //         'perawatan' => 'nullable|string|max:255',
+    //         'keterangan' => 'nullable|string|max:255',
+    //     ]);
 
-        Apar::create($request->all());
+    //     Apar::create($request->all());
 
-        return redirect()->route('pelaksana.dataapar')->with('success', 'Data Apar berhasil disimpan.');
-    }
+    //     return redirect()->route('pelaksana.dataapar')->with('success', 'Data Apar berhasil disimpan.');
+    // }
 
     
     // public function edit(Gambargedung $gambargedung)

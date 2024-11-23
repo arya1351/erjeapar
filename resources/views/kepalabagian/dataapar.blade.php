@@ -66,7 +66,7 @@
                 <div class="card-body">
                     <h5 class="card-title fw-semibold mb-4">Forms</h5>
                     <div class="d-flex justify-content-end">
-                        <a type="button" href="{{ route('apar.tambah') }}"
+                        <a type="button" href="{{ route('pelaksana.tambahapar') }}"
                             class="btn btn-primary m-1 justify-content-end">Tambah Data Apar</a>
                     </div>
                     <div class="table-responsive">

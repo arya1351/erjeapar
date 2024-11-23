@@ -1,4 +1,4 @@
-<title>Pelaksana-Data Gedung</title>
+<title>HRD-Data Gedung</title>
 
 @extends('layouts.app')
 @section('sidebar')
@@ -7,10 +7,10 @@
         <!-- Sidebar scroll-->
         <div>
             <div class="brand-logo d-flex align-items-center justify-content-between mx-auto row">
-                <a href="{{ route('pelaksana.dashboard') }}" class="text-nowrap logo-img justify-content-center mx-auto">
+                <a href="{{ route('hrd.dashboard') }}" class="text-nowrap logo-img justify-content-center mx-auto">
                     <img src="{{ asset('templates') }}/src/assets/images/logos/logoRJ.png" width="180" alt="" />
                 </a>
-                <a href="{{ route('pelaksana.dashboard') }}" class="text-center text-black fs-6 fw-bolder">
+                <a href="{{ route('hrd.dashboard') }}" class="text-center text-black fs-6 fw-bolder">
                     Monitoring Apar
                 </a>
                 <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
@@ -24,8 +24,8 @@
                         <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                         <span class="hide-menu">Home</span>
                     </li>
-                    <li class="sidebar-item {{ Request::is('pelaksana/dashboard') ? 'active' : '' }}">
-                        <a class="sidebar-link" href="{{ route('pelaksana.dashboard') }}" aria-expanded="false">
+                    <li class="sidebar-item {{ Request::is('hrd/dashboard') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('hrd.dashboard') }}" aria-expanded="false">
                             <span>
                                 <i class="ti ti-layout-dashboard"></i>
                             </span>
@@ -37,7 +37,7 @@
                         <span class="hide-menu">Data Master</span>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="{{ route('pelaksana.dataapar') }}" aria-expanded="false">
+                        <a class="sidebar-link" href="{{ route('hrd.dataapar') }}" aria-expanded="false">
                             <span>
                                 <i class="ti ti-fire-extinguisher"></i>
                             </span>
@@ -45,7 +45,7 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="{{ route('pelaksana.datagedung') }}" aria-expanded="false">
+                        <a class="sidebar-link" href="{{ route('hrd.datamapping') }}" aria-expanded="false">
                             <span>
                                 <i class="ti ti-building"></i>
                             </span>
@@ -75,10 +75,6 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title fw-semibold mb-4">Forms</h5>
-                    <div class="d-flex justify-content-end">
-                        <a type="button" href="{{ route('pelaksana.tambahlayoutgedung') }}"
-                            class="btn btn-primary m-1 justify-content-end">Tambah Layout Gedung</a>
-                    </div>
                     <div class="table-responsive">
                         <table class="table text-nowrap mb-0 align-middle">
                             <thead class="text-dark fs-4">
@@ -116,15 +112,6 @@
                                                 data-bs-target="#modaldetail{{ $gambargedung->id }}">
                                                 Detail
                                             </button>
-                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                data-bs-target="#editModal">
-                                                Edit
-                                            </button>
-                                            <!-- Button trigger modal -->
-                                            <button type="button" class="btn btn-Danger" data-bs-toggle="modal"
-                                                data-bs-target="#deleteModal">
-                                                Delete
-                                            </button>
                                         </td>
                                     </tr>
                                     <!-- Modal detail -->
@@ -140,10 +127,7 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col">
-                                                        <div class="d-flex justify-content-between mx-4 my-2">
                                                         <h1 class="mx-4 ">Daftar Mapping</h1>
-                                                        <button class="btn btn-primary">Tambah Mapping</button>
-                                                    </div>
                                                         <div class="row">
                                                             <div class="col">
                                                                 <ul>
@@ -151,10 +135,6 @@
                                                                         class="mx-4 alert bg-primary border text-white d-flex align-items-center justify-content-between">
                                                                         <a href=""
                                                                             class="text-white text-center justify-content-center align-items-center">{{ $gambargedung->id }}</a>
-                                                                        <button type="button"
-                                                                            class="btn btn-danger justify-content-end ti ti-trash"
-                                                                            data-bs-toggle="modal"
-                                                                            data-bs-target="#deletelayoutmodal">
                                                                         </button>
                                                                     </li>
                                                                     <li class="mx-4 alert bg-white border text-white">
@@ -171,59 +151,6 @@
                                                             width="720" height="720" alt="Image Preview"
                                                             class="img-fluid border border-3 border-black mt-3 mx-auto justify-content-center">
                                                     </div>
-                                                </div>
-                                                {{-- <div class="modal-footer">
-                                                    <button type="button" class="btn btn-danger"
-                                                        data-bs-dismiss="modal">Close</button>
-                                                </div> --}}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="deletelayoutmodal" tabindex="-1"
-                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    ...
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-bs-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn btn-primary">Save changes</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="deleteModal" tabindex="-1"
-                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p>Apa kamu yakin ingin menghapus layout gambar gedung ini?</p>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-bs-dismiss="modal">Close</button>
-                                                    <form action="{{ route('gambargedungs.destroy', $gambargedung->id) }}"
-                                                        method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-Danger">
-                                                            Delete
-                                                        </button>
                                                 </div>
                                             </div>
                                         </div>
@@ -245,43 +172,6 @@
                     max-height: 300px;
                 }
             </style>
-
-            <!-- Modal -->
-            <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog modal-xl">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            @error('nama')
-                                <div class="alert alert-danger" role="alert">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                            <h5 class="card-title fw-semibold mb-4">Layout gedung</h5>
-                            <form action="{{ route('gambargedungs.store') }}" method="POST"
-                                enctype="multipart/form-data">
-                                @csrf
-                                <label for="exampleInputEmail1" class="form-label">Masukkan Gambar Layout
-                                    Gedung</label>
-                                <input type="file" name="image_gedung" class="form-control" id="fileEdit"
-                                    accept="image/*" aria-describedby="FileHelp">
-                            </form>
-                            <img id="preimage" src="#" alt="Image Preview"
-                                class="img-fluid mt-3 mx-auto justify-content-center">
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
 
         <script>

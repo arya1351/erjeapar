@@ -69,20 +69,7 @@ class GambargedungController extends Controller
 
     public function destroy(Gambargedung $gambargedung)
     {
-        // $request->authenticate();
-
-        // $request->session()->regenerate();
-
         $gambargedung->delete();
         return redirect()->route('pelaksana.datagedung')->with('success', 'Gambar Gedung berhasil dihapus.');
-        // $url = "pelaksana/datagedung";
-
-        // if ($request->user()->role == "hrd") {
-        //     $url = "hrd/datagedung";
-        // } else if($request->user()->role == "kepalabagian"){
-        //     $url = "kepalabagian/datagedung";
-        // }
-
-        // return redirect()->intended($url);
     }
 }
