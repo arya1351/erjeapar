@@ -26,7 +26,7 @@ Route::middleware(['auth', 'role:pelaksana'])->group(function () {
     Route::post('/dashboard/tambahgedung', [GambargedungController::class, 'store'])->name('gambargedungs.store');
     Route::delete('/dashboard/datagedung/{gambargedung}', [GambargedungController::class, 'destroy'])->name('gambargedungs.destroy');
 
-    Route::get('/dashboard/tambahlayout', [GedungController::class, 'create'])->name('layoutgedung.tambah');
+    Route::get('/dashboard/tambahlayout', [PelaksanaController::class, 'creategedung'])->name('pelaksana.tambahmapping');
     Route::post('/dashboard/tambahlayout', [GedungController::class, 'store'])->name('layoutgedung.store');
 });
 

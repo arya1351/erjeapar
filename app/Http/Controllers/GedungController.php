@@ -10,11 +10,11 @@ use Illuminate\Http\Request;
 
 class GedungController extends Controller
 {
-    public function index()
-    {
-        $gedungs = Gedung::with('gambargedung')->get();
-        return view('pelaksana.datagedung', compact('gedungs'));
-    }
+    // public function index()
+    // {
+    //     $gedungs = Gedung::with('gambargedung')->get();
+    //     return view('pelaksana.datagedung', compact('gedungs'));
+    // }
 
     public function create()
     {

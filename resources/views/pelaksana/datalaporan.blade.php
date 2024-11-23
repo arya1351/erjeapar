@@ -1,4 +1,4 @@
-<title>Pelaksana-Dashboard</title>
+<title>Pelaksana-Data Apar</title>
 
 @extends('layouts.app')
 @section('sidebar')
@@ -53,7 +53,7 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="{{ route('pelaksana.dataapar') }}" aria-expanded="false">
+                        <a class="sidebar-link" href="{{ route('pelaksana.datalaporan') }}" aria-expanded="false">
                             <span>
                                 <i class="ti ti-article"></i>
                             </span>
@@ -67,49 +67,55 @@
         <!-- End Sidebar scroll-->
     </aside>
 @endsection
-
 @section('content')
+    <!--  Row 1 -->
     <div class="row">
+
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-4 mb-3 mb-sm-0">
-                    <div class="card">
-                        <div class="card-body">
-                            <h1 class="m-2">100</h1>
-                            <h3 class="m-2">Total Apar</h3>
-                            {{-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> --}}
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4 mb-3 mb-sm-0">
-                    <div class="card">
-                        <div class="card-body">
-                            <h1 class="m-2">100</h1>
-                            <h3 class="m-2">Total Gedung</h3>
-                            {{-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> --}}
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4 mb-3 mb-sm-0">
-                    <div class="card">
-                        <div class="card-body">
-                            <h1 class="m-2">100</h1>
-                            <h3 class="m-2">Total </h3>
-                            {{-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> --}}
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="card">
                 <div class="card-body">
-                    <div class="">
-                        <div class="">
-                        </div>
+                    <h5 class="card-title fw-semibold mb-4">Forms</h5>
+                    <div class="d-flex justify-content-end">
+                        <a type="button" href="{{ route('apar.tambah') }}"
+                            class="btn btn-primary m-1 justify-content-end">Tambah Data Apar</a>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table text-nowrap mb-0 align-middle">
+                            <thead class="text-dark fs-4">
+                                <tr>
+                                    <th class="border-bottom-0">
+                                        <h6 class="fw-semibold mb-0">No Urut</h6>
+                                    </th>
+                                    <th class="border-bottom-0">
+                                        <h6 class="fw-semibold mb-0">Jenis Apar</h6>
+                                    </th>
+                                    <th class="border-bottom-0">
+                                        <h6 class="fw-semibold mb-0">Merek</h6>
+                                    </th>
+                                    <th class="border-bottom-0">
+                                        <h6 class="fw-semibold mb-0">Lokasi</h6>
+                                    </th>
+                                    <th class="border-bottom-0">
+                                        <h6 class="fw-semibold mb-0">No Apar</h6>
+                                    </th>
+                                    <th class="border-bottom-0">
+                                        <h6 class="fw-semibold mb-0">Tanggal</h6>
+                                    </th>
+                                    <th class="border-bottom-0">
+                                        <h6 class="fw-semibold mb-0">Perawatan</h6>
+                                    </th>
+                                    <th class="border-bottom-0">
+                                        <h6 class="fw-semibold mb-0">Keterangan</h6>
+                                    </th>
+                                    <th class="border-bottom-0">
+                                        <h6 class="fw-semibold mb-0">Aksi</h6>
+                                    </th>
+                                </tr>
+                            </thead>
+                        </table>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
-    </div>
-@endsection
+        @endsection

@@ -37,7 +37,7 @@
                             <span>
                                 <i class="ti ti-article"></i>
                             </span>
-                            <span class="hide-menu">Data Apar</span>
+                            <span class="hide-menu">Mengelola Data Apar</span>
                         </a>
                     </li>
                     <li class="sidebar-item">
@@ -45,7 +45,7 @@
                             <span>
                                 <i class="ti ti-building"></i>
                             </span>
-                            <span class="hide-menu">Data Gedung</span>
+                            <span class="hide-menu">Mapping Apar</span>
                         </a>
                     </li>
                 </ul>
