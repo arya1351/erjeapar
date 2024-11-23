@@ -127,7 +127,10 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col">
+                                                        <div class="d-flex justify-content-between py-2 mx-4">
                                                         <h1 class="mx-4 ">test</h1>
+                                                        <button class="btn btn-primary m-2">Tambah</button>
+                                                    </div>
                                                         <div class="row">
                                                             <div class="col">
                                                                 <ul>
