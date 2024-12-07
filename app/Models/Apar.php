@@ -13,6 +13,8 @@ class Apar extends Model
 
     protected $fillable = ['jenis', 'merek', 'gedung_id','no_apar', 'tanggal_exp', 'perawatan', 'keterangan'];
 
+    public $timestamps = false;
+
     public function gedungs()
     {
         return $this->belongsTo(Gedung::class, 'gedung_id');

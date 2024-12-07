@@ -13,7 +13,7 @@ class GedungController extends Controller
     // public function index()
     // {
     //     $gedungs = Gedung::with('gambargedung')->get();
-    //     return view('pelaksana.datagedung', compact('gedungs'));
+    //     return view('pelaksana.datamapping', compact('gedungs'));
     // }
 
     public function create()

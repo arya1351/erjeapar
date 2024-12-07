@@ -13,19 +13,19 @@ class GambargedungController extends Controller
     public function pelaksana()
     {
         $gambargedungs = Gambargedung::all();
-        return view('pelaksana.datagedung', compact('gambargedungs'));
+        return view('pelaksana.datamapping', compact('gambargedungs'));
     }
 
     public function kepalabagian()
     {
         $gambargedungs = Gambargedung::all();
-        return view('kepalabagian.datagedung', compact('gambargedungs'));
+        return view('kepalabagian.datamapping', compact('gambargedungs'));
     }
 
     public function hrd()
     {
         $gambargedungs = Gambargedung::all();
-        return view('hrd.datagedung', compact('gambargedungs'));
+        return view('hrd.datamapping', compact('gambargedungs'));
     }
 
     public function create()
@@ -44,7 +44,7 @@ class GambargedungController extends Controller
 
         Gambargedung::create(['image_gedung' => $imageName]);
 
-        return redirect()->route('pelaksana.datagedung')->with('success', 'Gambar Gedung berhasil ditambahkan.');
+        return redirect()->route('pelaksana.datamapping')->with('success', 'Gambar Gedung berhasil ditambahkan.');
     }
 
     // public function edit(Gambargedung $gambargedung)
@@ -70,6 +70,6 @@ class GambargedungController extends Controller
     public function destroy(Gambargedung $gambargedung)
     {
         $gambargedung->delete();
-        return redirect()->route('pelaksana.datagedung')->with('success', 'Gambar Gedung berhasil dihapus.');
+        return redirect()->route('pelaksana.datamapping')->with('success', 'Gambar Gedung berhasil dihapus.');
     }
 }

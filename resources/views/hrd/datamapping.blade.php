@@ -1,5 +1,10 @@
 <title>HRD-Data Gedung</title>
-
+<style>
+    img #preview {
+        width: 75%;
+        height: 75%;
+    }
+</style>
 @extends('layouts.app')
 @section('sidebar')
     <!-- Sidebar Start -->
@@ -52,6 +57,10 @@
                             <span class="hide-menu">Mapping Apar</span>
                         </a>
                     </li>
+                    <li class="nav-small-cap">
+                        <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                        <span class="hide-menu">Data Transaction</span>
+                    </li>
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="#" aria-expanded="false">
                             <span>
@@ -75,15 +84,16 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title fw-semibold mb-4">Forms</h5>
+
                     <div class="table-responsive">
-                        <table class="table text-nowrap mb-0 align-middle">
+                        <table class="text-nowrap mb-0 table align-middle">
                             <thead class="text-dark fs-4">
                                 <tr class="border-bottom">
                                     <th class="border-bottom-0">
                                         <h6 class="fw-semibold mb-0">No Urut</h6>
                                     </th>
                                     <th class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-0 d-flex align-items-baseline justify-content-start">
+                                        <h6 class="fw-semibold d-flex align-items-baseline justify-content-start mb-0">
                                             Gambar Gedung</h6>
                                     </th>
                                     <th class="border-bottom-0 d-flex align-items-baseline justify-content-end">
@@ -98,20 +108,22 @@
                                 @foreach ($gambargedungs as $gambargedung)
                                     <tr class="border-bottom">
                                         <td class="border-bottom-0">
-                                            <h6 class="fw-Bold mb-0 text-center">{{ $no++ }}</h6>
+                                            <h6 class="fw-Bold mb-0 text-center">{{ $loop->iteration }}</h6>
                                         </td>
                                         <td class="border-bottom-0">
                                             <h6 class="fw-semibold mb-1"><img
                                                     src="{{ asset('images/' . $gambargedung->image_gedung) }}"
                                                     data-bs-toggle="modal"
-                                                data-bs-target="#modaldetail{{ $gambargedung->id }}"
-                                                    width="500" class="border border-3 border-black"></h6>
+                                                    data-bs-target="#modaldetail{{ $gambargedung->id }}" width="500"
+                                                    class="border-3 border border-black"></h6>
                                         </td>
                                         <td class="border-bottom-0 position-relative d-flex justify-content-end gap-2">
                                             <button type="button" class="btn btn-success" data-bs-toggle="modal"
                                                 data-bs-target="#modaldetail{{ $gambargedung->id }}">
                                                 Detail
                                             </button>
+                                            <!-- Button trigger modal -->
+
                                         </td>
                                     </tr>
                                     <!-- Modal detail -->
@@ -127,29 +139,35 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col">
-                                                        <h1 class="mx-4 ">Daftar Mapping</h1>
+                                                        <div class="d-flex justify-content-between mx-4 py-4">
+                                                            <h1 class="mx-4">Daftar Mapping</h1>
+                                                            {{-- <a href="{{ route('hrd.tambahmapping', $gambargedung->id) }}"
+                                                                class="btn btn-success my-auto">Tambah, Edit & Hapus
+                                                                Mapping</a> --}}
+                                                        </div>
                                                         <div class="row">
                                                             <div class="col">
                                                                 <ul>
-                                                                    <li
-                                                                        class="mx-4 alert bg-primary border text-white d-flex align-items-center justify-content-between">
-                                                                        <a href=""
-                                                                            class="text-white text-center justify-content-center align-items-center">{{ $gambargedung->id }}</a>
-                                                                        </button>
-                                                                    </li>
-                                                                    <li class="mx-4 alert bg-white border text-white">
-                                                                        <a href=""
-                                                                            class="text-black">{{ $gambargedung->id }}</a>
-                                                                    </li>
+                                                                    @foreach ($gedungs as $gedung)
+                                                                        <a href="#" class="text-center text-white"
+                                                                            onclick="selectGedung({{ $gedung['id'] }})">
+
+                                                                            <li id="gedungItem{{ $gedung['id'] }}"
+                                                                                class="alert bg-primary d-flex align-items-center justify-content-between mx-4 border text-white">
+                                                                                {{ $gedung['nama_ruangan'] }}
+                                                                                {{-- <button type="button" class="btn btn-warning justify-content-end ti ti-trash" data-bs-toggle="modal" data-bs-target="#deletelayoutmodal{{ $gedung['id'] }}"> --}}
+                                                                            </li>
+                                                                        </a>
+                                                                    @endforeach
                                                                 </ul>
+
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col justify-content-center">
-                                                        <img id="preview"
-                                                            src="{{ asset('images/' . $gambargedung->image_gedung) }}"
-                                                            width="720" height="720" alt="Image Preview"
-                                                            class="img-fluid border border-3 border-black mt-3 mx-auto justify-content-center">
+                                                        <canvas id="canvas{{ $gambargedung->id }}" width="1080"
+                                                            height="1080" alt="Image Preview"
+                                                            class="img-fluid border-3 justify-content-center mx-auto mt-3 border border-black"style="transform: scale(0.75); transform-origin: center"></canvas>
                                                     </div>
                                                 </div>
                                             </div>
@@ -159,41 +177,106 @@
                             </tbody>
                         </table>
                     </div>
-
                 </div>
             </div>
-
-
-
-            <style>
-                #preimage {
-                    display: none;
-                    max-width: 100%;
-                    max-height: 300px;
-                }
-            </style>
         </div>
-
-        <script>
-            const fileEdit = document.getElementById('fileEdit');
-            const preimage = document.getElementById('preimage');
-
-            fileEdit.addEventListener('change', function(event) {
-                const file = event.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        preimage.src = e.target.result;
-                        preimage.style.display = 'block';
-                    };
-                    reader.readAsDataURL(file);
-                } else {
-                    preimage.style.display = 'none';
-                }
-            });
-        </script>
 
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="{{ asset('templates') }}/src/assets/libs/apexcharts/dist/apexcharts.min.js"></script>
+        <script src="{{ asset('templates') }}/src/assets/libs/simplebar/dist/simplebar.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const gambargedungs = @json($gambargedungs);
+                let selectedGedungId = null; // Variabel untuk menyimpan ID gedung yang dipilih
+                const gedungs = @json($gedungs); // Gunakan data $gedungs langsung
+
+                gambargedungs.forEach(gambargedung => {
+                    const canvas = document.getElementById(`canvas${gambargedung.id}`);
+                    const ctx = canvas.getContext("2d");
+                    const image = new Image();
+
+                    image.src = `/images/${gambargedung.image_gedung}`;
+                    image.onload = function() {
+                        ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+                        // Fetch data mapping untuk gedung ini
+                        fetch(`/hrd/datamapping/${gambargedung.id}/mapping`)
+                            .then(response => response.json())
+                            .then(data => {
+                                gambargedung.mappings = data; // Simpan data mapping ke objek gedung
+                                drawCanvas(canvas, ctx, gambargedung); // Gambar ulang canvas
+                            })
+                            .catch(error => console.error("Error fetching data:", error));
+                    };
+                });
+
+                // Fungsi untuk memilih gedung
+                window.selectGedung = function(gedungId) {
+                    // Jika ID yang dipilih sama, keluar tanpa perubahan
+                    if (selectedGedungId === gedungId) {
+                        return;
+                    }
+
+                    selectedGedungId = gedungId; // Perbarui ID gedung yang dipilih
+
+                    console.log(`Gedung dengan ID ${gedungId} dipilih`);
+
+                    // Ubah warna item terpilih
+                    gedungs.forEach(gedung => {
+                        const listItem = document.getElementById(`gedungItem${gedung.id}`);
+                        if (listItem) {
+                            if (gedung.id === gedungId) {
+                                listItem.classList.remove("bg-primary");
+                                listItem.classList.add("bg-danger");
+                            } else {
+                                listItem.classList.remove("bg-danger");
+                                listItem.classList.add("bg-primary");
+                            }
+                        }
+                    });
+
+                    // Render ulang semua canvas
+                    gambargedungs.forEach(gambargedung => {
+                        const canvas = document.getElementById(`canvas${gambargedung.id}`);
+                        const ctx = canvas.getContext("2d");
+                        drawCanvas(canvas, ctx, gambargedung, gedungId); // Kirim gedungId ke drawCanvas
+                    });
+                };
+
+                // Fungsi untuk menggambar ulang canvas
+                function drawCanvas(canvas, ctx, gambargedung, activeGedungId = null) {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                    // Gambar ulang gambar gedung
+                    const image = new Image();
+                    image.src = `/images/${gambargedung.image_gedung}`;
+                    image.onload = function() {
+                        ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+                        // Gambar semua mapping
+                        if (gambargedung.mappings) {
+                            gambargedung.mappings.forEach(mapping => {
+                                const width = mapping.width || 50; // Default lebar
+                                const height = mapping.height || 50; // Default tinggi
+                                ctx.beginPath();
+                                ctx.rect(mapping.x - width / 2, mapping.y - height / 2, width, height);
+                                ctx.fillStyle = mapping.id === activeGedungId ?
+                                    'rgba(255, 0, 0, 0.5)' // Warna merah untuk gedung aktif
+                                    :
+                                    'rgba(55, 55, 255, 0.5)'; // Warna biru untuk gedung lain
+                                ctx.fill();
+                                ctx.closePath();
+
+                                // Tampilkan nama ruangan
+                                ctx.font = '12px Arial';
+                                ctx.fillStyle = 'black';
+                                ctx.fillText(mapping.nama_ruangan, mapping.x + width / 2 + 5, mapping.y);
+                            });
+                        }
+                    };
+                }
+            });
+        </script>
     @endsection

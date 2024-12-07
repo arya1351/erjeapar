@@ -13,9 +13,12 @@ return new class extends Migration
     {
         Schema::create('gedungs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('gambargedung_id')->constrained('gambargedungs')->onDelete('cascade');
+            $table->foreignId(column: 'gambargedung_id')->constrained('gambargedungs')->onDelete('cascade');
             $table->string('nama_ruangan');
-            $table->text('area');
+            $table->float('x'); 
+            $table->float('y');
+            $table->integer('width')->nullable();
+            $table->integer('height')->nullable();
             $table->timestamps();
         });
     }

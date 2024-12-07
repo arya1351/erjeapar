@@ -22,7 +22,7 @@
                         <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                         <span class="hide-menu">Home</span>
                     </li>
-                    <li class="sidebar-item">
+                    <li class="sidebar-item {{ Request::is('kepalabagian/dashboard') ? 'active' : '' }}">
                         <a class="sidebar-link" href="{{ route('kepalabagian.dashboard') }}" aria-expanded="false">
                             <span>
                                 <i class="ti ti-layout-dashboard"></i>
@@ -37,19 +37,28 @@
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="{{ route('kepalabagian.dataapar') }}" aria-expanded="false">
                             <span>
-                                <i class="ti ti-article"></i>
+                                <i class="ti ti-fire-extinguisher"></i>
                             </span>
-                            <span class="hide-menu">Data Apar</span>
+                            <span class="hide-menu">Mengelola Data Apar</span>
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="{{ route('kepalabagian.datagedung') }}" aria-expanded="false">
+                        <a class="sidebar-link" href="{{ route('kepalabagian.datamapping') }}" aria-expanded="false">
                             <span>
                                 <i class="ti ti-building"></i>
                             </span>
-                            <span class="hide-menu">Data Gedung</span>
+                            <span class="hide-menu">Mapping Apar</span>
                         </a>
                     </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('kepalabagian.dataapar') }}" aria-expanded="false">
+                            <span>
+                                <i class="ti ti-article"></i>
+                            </span>
+                            <span class="hide-menu">Laporan</span>
+                        </a>
+                    </li>
+                </ul>
             </nav>
             <!-- End Sidebar navigation -->
         </div>
@@ -61,32 +70,46 @@
     <div class="row">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-sm-4 mb-3 mb-sm-0">
+                <div class="col-sm-4 mb-sm-0 mb-3">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Special title treatment</h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <h1 class="m-2">100</h1>
+                            <h3 class="m-2">Total Apar</h3>
+                            {{-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> --}}
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-4 mb-3 mb-sm-0">
+                <div class="col-sm-4 mb-sm-0 mb-3">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Special title treatment</h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <h1 class="m-2">100</h1>
+                            <h3 class="m-2">Total Gedung</h3>
+                            {{-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> --}}
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-4 mb-3 mb-sm-0">
+                <div class="col-sm-4 mb-sm-0 mb-3">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Special title treatment</h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <h1 class="m-2">100</h1>
+                            <h3 class="m-2">Total </h3>
+                            {{-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> --}}
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="">
+                        <div class="">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
     </div>
-@endsection
+
+    {{-- <script src="{{ asset('templates') }}/src/assets/js/dashboard.js"></script> --}}
+@endsection 

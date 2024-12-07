@@ -1,4 +1,4 @@
-<title>HRD | Dashboard</title>
+<title>HRD-Dashboard</title>
 
 @extends('layouts.app')
 @section('sidebar')
@@ -52,6 +52,10 @@
                             <span class="hide-menu">Mapping Apar</span>
                         </a>
                     </li>
+                    <li class="nav-small-cap">
+                        <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                        <span class="hide-menu">Data Transaction</span>
+                    </li>
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="#" aria-expanded="false">
                             <span>
@@ -72,32 +76,46 @@
     <div class="row">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-sm-4 mb-3 mb-sm-0">
+                <div class="col-sm-4 mb-sm-0 mb-3">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Special title treatment</h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <h1 class="m-2">100</h1>
+                            <h3 class="m-2">Total Apar</h3>
+                            {{-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> --}}
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-4 mb-3 mb-sm-0">
+                <div class="col-sm-4 mb-sm-0 mb-3">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Special title treatment</h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <h1 class="m-2">100</h1>
+                            <h3 class="m-2">Total Gedung</h3>
+                            {{-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> --}}
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-4 mb-3 mb-sm-0">
+                <div class="col-sm-4 mb-sm-0 mb-3">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Special title treatment</h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <h1 class="m-2">100</h1>
+                            <h3 class="m-2">Total </h3>
+                            {{-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> --}}
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="">
+                        <div class="">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
     </div>
+
+    {{-- <script src="{{ asset('templates') }}/src/assets/js/dashboard.js"></script> --}}
 @endsection

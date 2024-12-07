@@ -6,13 +6,15 @@
     <aside class="left-sidebar">
         <!-- Sidebar scroll-->
         <div>
-            <div class="brand-logo d-flex align-items-center justify-content-between mx-auto row">
-                <a href="{{ route('pelaksana.dashboard') }}" class="text-nowrap logo-img justify-content-center mx-auto">
-                    <img src="{{ asset('templates') }}/src/assets/images/logos/logoRJ.png" width="180" alt="" />
-                </a>
-                <a href="{{ route('pelaksana.dashboard') }}" class="text-center text-black fs-6 fw-bolder">
-                    Monitoring Apar
-                </a>
+            <div class="brand-logo d-flex align-items-center justify-content-between mx-auto">
+                <div class="row py-4">
+                    <a href="{{ route('pelaksana.dashboard') }}" class="text-nowrap logo-img justify-content-center mx-auto">
+                        <img src="{{ asset('templates') }}/src/assets/images/logos/logoRJ.png" width="180" alt="" />
+                    </a>
+                    <a href="{{ route('pelaksana.dashboard') }}" class="fs-6 fw-bolder text-center text-black">
+                        Monitoring Apar
+                    </a>
+                </div>
                 <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
                     <i class="ti ti-x fs-8"></i>
                 </div>
@@ -22,7 +24,7 @@
                 <ul id="sidebarnav">
                     <li class="nav-small-cap">
                         <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                        <span class="hide-menu">Home</span>
+                        <span class="hide-menu fst-italic">Home</span>
                     </li>
                     <li class="sidebar-item {{ Request::is('pelaksana/dashboard') ? 'active' : '' }}">
                         <a class="sidebar-link" href="{{ route('pelaksana.dashboard') }}" aria-expanded="false">
@@ -34,7 +36,7 @@
                     </li>
                     <li class="nav-small-cap">
                         <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                        <span class="hide-menu">Data Master</span>
+                        <span class="hide-menu fst-italic">Data Master</span>
                     </li>
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="{{ route('pelaksana.dataapar') }}" aria-expanded="false">
@@ -45,7 +47,7 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="{{ route('pelaksana.datagedung') }}" aria-expanded="false">
+                        <a class="sidebar-link" href="{{ route('pelaksana.datamapping') }}" aria-expanded="false">
                             <span>
                                 <i class="ti ti-building"></i>
                             </span>
@@ -53,11 +55,23 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="#" aria-expanded="false">
+                        <a class="sidebar-link" href="{{ route('pelaksana.datalaporan') }}" aria-expanded="false">
                             <span>
                                 <i class="ti ti-article"></i>
                             </span>
                             <span class="hide-menu">Laporan</span>
+                        </a>
+                    </li>
+                    <li class="nav-small-cap">
+                        <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                        <span class="hide-menu fst-italic">Data Sender</span>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('pelaksana.datakirimlaporan') }}" aria-expanded="false">
+                            <span>
+                                <i class="ti ti-send"></i>
+                            </span>
+                            <span class="hide-menu">Kirim Laporan</span>
                         </a>
                     </li>
                 </ul>
@@ -76,149 +90,39 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title fw-semibold mb-4">Forms</h5>
-                    <div class="d-flex justify-content-end">
+                    <div class="d-flex justify-content-end mx-2">
                         <a type="button" href="{{ route('pelaksana.tambahapar') }}"
                             class="btn btn-primary m-1 justify-content-end">Tambah Data Apar</a>
+                            
                     </div>
                     <div class="table-responsive">
-                        <table class="table text-nowrap mb-0 align-middle">
-                            <thead class="text-dark fs-4">
-                                <tr>
-                                    <th class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-0">No Urut</h6>
-                                    </th>
-                                    <th class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-0">Jenis Apar</h6>
-                                    </th>
-                                    <th class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-0">Merek</h6>
-                                    </th>
-                                    <th class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-0">Lokasi</h6>
-                                    </th>
-                                    <th class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-0">No Apar</h6>
-                                    </th>
-                                    <th class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-0">Tanggal</h6>
-                                    </th>
-                                    <th class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-0">Perawatan</h6>
-                                    </th>
-                                    <th class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-0">Keterangan</h6>
-                                    </th>
-                                    <th class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-0">Aksi</h6>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $no = 1;
-                                ?>
-                                @foreach ($apars as $apar)
-                                    <tr>
-                                        <td class="border-bottom-0">
-                                            <h6 class="fw-Bold mb-0 text-center">{{ $no++ }}</h6>
-                                        </td>
-                                        <td class="border-bottom-0">
-                                            <h6 class="fw-semibold mb-1 d-inline-block text-truncate"
-                                                style="max-width: 100px;">{{ $apar->jenis }}</h6>
-                                        </td>
-                                        <td class="border-bottom-0">
-                                            <h6 class="fw-semibold mb-1 d-inline-block text-truncate"
-                                                style="max-width: 100px;">{{ $apar->merek }}</h6>
-                                        </td>
-                                        <td class="border-bottom-0">
-                                            <!-- Mengakses nama_ruangan melalui relasi gedung -->
-                                            <p class="mb-0 fw-normal">{{ $apar->gedungs->nama_ruangan ?? 'N/A' }}</p>
-                                        </td>
-                                        <td class="border-bottom-0 mx-auto">
-                                            <div class="d-flex align-items-center gap-2  justify-content-center">
-                                                <span
-                                                    class="badge bg-primary rounded-3 fw-semibold">{{ $apar->no_apar }}</span>
-                                            </div>
-                                        </td>
-                                        <td class="border-bottom-0">
-                                            <p class="mb-0 fw-normal">{{ $apar->tanggal_exp }}</p>
-                                        </td>
-                                        <td class="border-bottom-0">
-                                            <p class="mb-0 fw-normal d-inline-block text-truncate"
-                                                style="max-width: 100px;">{{ $apar->perawatan }}</p>
-                                        </td>
-                                        <td class="border-bottom-0">
-                                            <p class="mb-0 fw-normal d-inline-block text-truncate"
-                                                style="max-width: 100px;">{{ $apar->keterangan }}</p>
-                                        </td>
-                                        <td class="border-bottom-0 d-inline-flex gap-1">
-                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal1">
-                                                Edit
-                                            </button>
-                                            <!-- Button trigger modal -->
-                                            <button type="submit" class="btn btn-Danger" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal{{ $apar->id }}">
-                                                Delete
-                                            </button>
-                                        </td>
-                                    </tr>
-
-                                    <div class="modal fade" id="exampleModal{{ $apar->id }}" tabindex="-1"
-                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p>Apa kamu yakin ingin menghapus Apar dengan nomer apar
-                                                        {{ $apar->no_apar }}</p>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-bs-dismiss="modal">Close</button>
-                                                    <form action="{{ route('apars.destroy', $apar->id) }}"
-                                                        method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-Danger">
-                                                            Delete
-                                                        </button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-
-                </div>
-            </div>
-
-
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
+                        <div class="d-flex mx-4 justify-content-between my-auto">
+                            <form class="d-flex" action="" method="GET">
+                            <input class="form-control" list="datalistOptions" name="search" id="search" value="{{ request('search') }}" placeholder="Type to search...">
+                        </form>
+                            @foreach ($apars as $apar)
+                                <datalist id="datalistOptions">
+                                    <option value="{{ $apar->jenis }}">
+                                    <option value="{{ $apar->merk }}">
+                                    <option value="{{ $apar->no_apar }}">
+                                    <option value="{{ $apar->tanggal_exp }}">
+                                    <option value="{{ $apar->perawatan }}">
+                                    <option value="{{ $apar->keterangan }}">
+                                    <option value="{{ $apar->gedungs->nama_ruangan  }}">
+                                    </datalist>
+                            @endforeach
+                        <a type="button" href="dataapar-export"
+                            class="btn btn-warning m-1 justify-content-end">Exports</a>
                         </div>
-                        <div class="modal-body">
-                            ...
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                      
+                            <div id="data-table">
+                                @include('pelaksana.data-apar-partial', ['apars' => $apars])
+                            </div>
+                       
+
+
+              <!-- Modal -->
+             
+            <script src="{{ asset('templates') }}/src/assets/libs/apexcharts/dist/apexcharts.min.js"></script>
+            <script src="{{ asset('templates') }}/src/assets/libs/simplebar/dist/simplebar.js"></script>
         @endsection

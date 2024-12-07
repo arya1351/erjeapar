@@ -41,7 +41,7 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="{{ route('pelaksana.datagedung') }}" aria-expanded="false">
+                        <a class="sidebar-link" href="{{ route('pelaksana.datamapping') }}" aria-expanded="false">
                             <span>
                                 <i class="ti ti-building"></i>
                             </span>
@@ -76,7 +76,7 @@
                 <form action="{{ route('gambargedungs.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Masukkan Gambar Layout Gedung</label>
+                        <label for="labelInputLayoutGedung" class="form-label">Masukkan Gambar Layout Gedung</label>
                         <input type="file" name="image_gedung" class="form-control" id="fileInput" accept="image/*"
                             aria-describedby="FileHelp">
                     </div>

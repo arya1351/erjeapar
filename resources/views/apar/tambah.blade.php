@@ -42,7 +42,7 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="{{ route('pelaksana.datagedung') }}" aria-expanded="false">
+                        <a class="sidebar-link" href="{{ route('pelaksana.datamapping') }}" aria-expanded="false">
                             <span>
                                 <i class="ti ti-building"></i>
                             </span>

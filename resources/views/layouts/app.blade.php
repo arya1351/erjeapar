@@ -7,6 +7,7 @@
     <link rel="shortcut icon" type="image/png" href="{{ asset('/assets/images/logos/logoRJ.png') }}" />
     <link rel="stylesheet" href="{{ asset('templates') }}/src/assets/css/styles.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
 <body>
@@ -29,7 +30,7 @@
                         </li>
                     </ul>
                     <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
-                        <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
+                        <ul class="navbar-nav align-items-center justify-content-end ms-auto flex-row">
                             <li class="nav-item dropdown">
                                 <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2"
                                     data-bs-toggle="dropdown" aria-expanded="false">
@@ -40,20 +41,20 @@
                                     aria-labelledby="drop2">
                                     <div class="message-body">
                                         <a href="javascript:void(0)"
-                                            class="d-flex align-items-center gap-2 dropdown-item">
+                                            class="d-flex align-items-center dropdown-item gap-2">
                                             <i class="ti ti-user fs-6"></i>
-                                            <p class="mb-0 fs-3">My Profile</p>
+                                            <p class="fs-3 mb-0">My Profile</p>
                                         </a>
                                         <a href="javascript:void(0)"
-                                            class="d-flex align-items-center gap-2 dropdown-item">
+                                            class="d-flex align-items-center dropdown-item gap-2">
                                             <i class="ti ti-mail fs-6"></i>
-                                            <p class="mb-0 fs-3">My Account</p>
+                                            <p class="fs-3 mb-0">My Account</p>
                                         </a>
 
                                         <form method="POST" action="{{ route('logout') }}">
                                             @csrf
                                             <button type="submit"
-                                                class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</button>
+                                                class="btn btn-outline-primary d-block mx-3 mt-2">Logout</button>
                                         </form>
                                     </div>
                                 </div>
@@ -66,9 +67,9 @@
             <div class="container-fluid">
                 @yield('content')
             </div>
-            <div class="py-6 px-6 text-center">
-                <p class="mb-0 fs-4">Design and Developed by <a href="https://adminmart.com/" target="_blank"
-                        class="pe-1 text-primary text-decoration-underline">AdminMart.com</a> Distributed by <a
+            <div class="px-6 py-6 text-center">
+                <p class="fs-4 mb-0">Design and Developed by <a href="https://adminmart.com/" target="_blank"
+                        class="text-primary text-decoration-underline pe-1">AdminMart.com</a> Distributed by <a
                         href="https://themewagon.com">ThemeWagon</a></p>
             </div>
         </div>
@@ -78,9 +79,29 @@
     <script src="{{ asset('templates') }}/src/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('templates') }}/src/assets/js/sidebarmenu.js"></script>
     <script src="{{ asset('templates') }}/src/assets/js/app.min.js"></script>
-    <script src="{{ asset('templates') }}/src/assets/libs/apexcharts/dist/apexcharts.min.js"></script>
-    <script src="{{ asset('templates') }}/src/assets/libs/simplebar/dist/simplebar.js"></script>
-    <script src="{{ asset('templates') }}/src/assets/js/dashboard.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#search').on('keyup', function() {
+                let query = $(this).val();
+                $.ajax({
+                    url: "{{ route('dataapar.search') }}",
+                    type: "GET",
+                    data: {
+                        search: query
+                    },
+                    success: function(data) {
+                        $('#data-table').html(data);
+                    },
+                    error: function() {
+                        alert('Terjadi kesalahan. Silakan coba lagi.');
+                    }
+                });
+            });
+        });
+    </script>
+
 </body>
 
 </html>

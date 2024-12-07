@@ -1,262 +1,291 @@
+<title>Dashboard-Tambah Gedung</title>
+@extends('layouts.app')
 
-<!doctype html>
-<html lang="en">
+@section('content')
+<style>
+    canvas {
+        border: 1px solid black;
+        cursor: pointer;
+        display: block;
+        margin: 20px auto;
+        position: relative;
+    }
+    #info {
+        margin-top: 20px;
+        text-align: center;
+    }
+    .btn {
+        padding: 10px 20px;
+        margin: 5px;
+        cursor: pointer;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+    }
+    .btn:hover {
+        background-color: #0056b3;
+    }
+</style>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Modernize Free</title>
-  <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png" />
-  <link rel="stylesheet" href="{{ asset('templates')}}/src/assets/css/styles.min.css" />
-</head>
+<h1>CRUD Denah Ruangan</h1>
 
-<body>
-  <!--  Body Wrapper -->
-  <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
-    data-sidebar-position="fixed" data-header-position="fixed">
-    <!-- Sidebar Start -->
-    <aside class="left-sidebar">
-      <!-- Sidebar scroll-->
-      <div>
-        <div class="brand-logo d-flex align-items-center justify-content-between">
-          <a href="./index.html" class="text-nowrap logo-img">
-            <img src="../assets/images/logos/dark-logo.svg" width="180" alt="" />
-          </a>
-          <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
-            <i class="ti ti-x fs-8"></i>
-          </div>
-        </div>
-        <!-- Sidebar navigation-->
-        <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
-          <ul id="sidebarnav">
-            <li class="nav-small-cap">
-              <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-              <span class="hide-menu">Home</span>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./index.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-layout-dashboard"></i>
-                </span>
-                <span class="hide-menu">Dashboard</span>
-              </a>
-            </li>
-            <li class="nav-small-cap">
-              <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-              <span class="hide-menu">UI COMPONENTS</span>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./ui-buttons.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-article"></i>
-                </span>
-                <span class="hide-menu">Buttons</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./ui-alerts.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-alert-circle"></i>
-                </span>
-                <span class="hide-menu">Alerts</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./ui-card.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-cards"></i>
-                </span>
-                <span class="hide-menu">Card</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./ui-forms.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-file-description"></i>
-                </span>
-                <span class="hide-menu">Forms</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./ui-typography.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-typography"></i>
-                </span>
-                <span class="hide-menu">Typography</span>
-              </a>
-            </li>
-            <li class="nav-small-cap">
-              <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-              <span class="hide-menu">AUTH</span>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./authentication-login.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-login"></i>
-                </span>
-                <span class="hide-menu">Login</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./authentication-register.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-user-plus"></i>
-                </span>
-                <span class="hide-menu">Register</span>
-              </a>
-            </li>
-            <li class="nav-small-cap">
-              <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-              <span class="hide-menu">EXTRA</span>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./icon-tabler.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-mood-happy"></i>
-                </span>
-                <span class="hide-menu">Icons</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="./sample-page.html" aria-expanded="false">
-                <span>
-                  <i class="ti ti-aperture"></i>
-                </span>
-                <span class="hide-menu">Sample Page</span>
-              </a>
-            </li>
-          </ul>
-          <div class="unlimited-access hide-menu bg-light-primary position-relative mb-7 mt-5 rounded">
-            <div class="d-flex">
-              <div class="unlimited-access-title me-3">
-                <h6 class="fw-semibold fs-4 mb-6 text-dark w-85">Upgrade to pro</h6>
-                <a href="https://adminmart.com/product/modernize-bootstrap-5-admin-template/" target="_blank" class="btn btn-primary fs-2 fw-semibold lh-sm">Buy Pro</a>
-              </div>
-              <div class="unlimited-access-img">
-                <img src="../assets/images/backgrounds/rocket.png" alt="" class="img-fluid">
-              </div>
-            </div>
-          </div>
-        </nav>
-        <!-- End Sidebar navigation -->
-      </div>
-      <!-- End Sidebar scroll-->
-    </aside>
-    <!--  Sidebar End -->
-    <!--  Main wrapper -->
-    <div class="body-wrapper">
-      <!--  Header Start -->
-      <header class="app-header">
-        <nav class="navbar navbar-expand-lg navbar-light">
-          <ul class="navbar-nav">
-            <li class="nav-item d-block d-xl-none">
-              <a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse" href="javascript:void(0)">
-                <i class="ti ti-menu-2"></i>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link nav-icon-hover" href="javascript:void(0)">
-                <i class="ti ti-bell-ringing"></i>
-                <div class="notification bg-primary rounded-circle"></div>
-              </a>
-            </li>
-          </ul>
-          <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
-            <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
-              <a href="https://adminmart.com/product/modernize-free-bootstrap-admin-dashboard/" target="_blank" class="btn btn-primary">Download Free</a>
-              <li class="nav-item dropdown">
-                <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
-                  aria-expanded="false">
-                  <img src="../assets/images/profile/user-1.jpg" alt="" width="35" height="35" class="rounded-circle">
-                </a>
-                <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
-                  <div class="message-body">
-                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
-                      <i class="ti ti-user fs-6"></i>
-                      <p class="mb-0 fs-3">My Profile</p>
-                    </a>
-                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
-                      <i class="ti ti-mail fs-6"></i>
-                      <p class="mb-0 fs-3">My Account</p>
-                    </a>
-                    <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
-                      <i class="ti ti-list-check fs-6"></i>
-                      <p class="mb-0 fs-3">My Task</p>
-                    </a>
-                    <a href="./authentication-login.html" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </header>
-      <!--  Header End -->
-      <div class="container-fluid">
-        <div class="container-fluid">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title fw-semibold mb-4">Forms</h5>
-              <div class="card">
-                <div class="card-body">
-                  <form>
-                    <div class="mb-3">
-                      <label for="exampleInputEmail1" class="form-label">Email address</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-                    </div>
-                    <div class="mb-3">
-                      <label for="exampleInputPassword1" class="form-label">Password</label>
-                      <input type="password" class="form-control" id="exampleInputPassword1">
-                    </div>
-                    <div class="mb-3 form-check">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                      <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                  </form>
-                </div>
-              </div>
-              <h5 class="card-title fw-semibold mb-4">Disabled forms</h5>
-              <div class="card mb-0">
-                <div class="card-body">
-                  <form>
-                    <fieldset disabled>
-                      <legend>Disabled fieldset example</legend>
-                      <div class="mb-3">
-                        <label for="disabledTextInput" class="form-label">Disabled input</label>
-                        <input type="text" id="disabledTextInput" class="form-control" placeholder="Disabled input">
-                      </div>
-                      <div class="mb-3">
-                        <label for="disabledSelect" class="form-label">Disabled select menu</label>
-                        <select id="disabledSelect" class="form-select">
-                          <option>Disabled select</option>
-                        </select>
-                      </div>
-                      <div class="mb-3">
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="disabledFieldsetCheck" disabled>
-                          <label class="form-check-label" for="disabledFieldsetCheck">
-                            Can't check this
-                          </label>
-                        </div>
-                      </div>
-                      <button type="submit" class="btn btn-primary">Submit</button>
-                    </fieldset>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <script src="{{ asset('templates')}}/src/assets/libs/jquery/dist/jquery.min.js"></script>
-  <script src="{{ asset('templates')}}/src/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="{{ asset('templates')}}/src/assets/js/sidebarmenu.js"></script>
-  <script src="{{ asset('templates')}}/src/assets/js/app.min.js"></script>
-  <script src="{{ asset('templates')}}/src/assets/libs/simplebar/dist/simplebar.js"></script>
-</body>
+<canvas id="canvas" width="800" height="600"></canvas>
 
-</html>
+<div id="info">
+    <button class="btn" id="createMode">Tambah Ruangan</button>
+    <button class="btn" id="resizeMode">Ubah Ukuran</button>
+</div>
+
+<script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const imageSrc = "{{ asset('images/' . $gambargedungs->image_gedung) }}";
+    let gedungs = [];
+    let mode = 'create'; // Modes: create, resize
+    let dragging = false;
+    let selectedGedung = null;
+    let startX, startY, startWidth, startHeight;
+    let draggingGedung = null; 
+    let offsetX, offsetY;
+
+    const defaultSize = 30;
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+    const background = new Image();
+    background.src = imageSrc;
+    background.onload = function () {
+        drawCanvas();
+    };
+
+    function drawCanvas() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+
+        gedungs.forEach(gedung => {
+            const boxWidth = gedung.width || defaultSize;
+            const boxHeight = gedung.height || defaultSize;
+            ctx.beginPath();
+            ctx.rect(gedung.x - boxWidth / 2, gedung.y - boxHeight / 2, boxWidth, boxHeight);
+            ctx.fillStyle = 'blue';
+            ctx.fill();
+            ctx.closePath();
+
+            ctx.font = '12px Arial';
+            ctx.fillStyle = 'black';
+            ctx.fillText(gedung.nama_ruangan, gedung.x + boxWidth / 2 + 5, gedung.y);
+
+            ctx.beginPath();
+            ctx.arc(gedung.x + boxWidth / 2, gedung.y + boxHeight / 2, 5, 0, 2 * Math.PI);
+            ctx.fillStyle = 'green';
+            ctx.fill();
+            ctx.closePath();
+        });
+    }
+
+    canvas.addEventListener('mousedown', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        if (mode === 'create') {
+            addGedung(x, y);
+        } else if (mode === 'resize') {
+            selectedGedung = gedungs.find(gedung => {
+                const boxWidth = gedung.width || defaultSize;
+                const boxHeight = gedung.height || defaultSize;
+                const handleX = gedung.x + boxWidth / 2;
+                const handleY = gedung.y + boxHeight / 2;
+                return Math.hypot(x - handleX, y - handleY) <= 5;
+            });
+
+            if (selectedGedung) {
+                startX = x;
+                startY = y;
+                startWidth = selectedGedung.width;
+                startHeight = selectedGedung.height;
+                dragging = true;
+            } else {
+                draggingGedung = gedungs.find(gedung => {
+                    const boxWidth = gedung.width || defaultSize;
+                    const boxHeight = gedung.height || defaultSize;
+                    return x >= gedung.x - boxWidth / 2 && x <= gedung.x + boxWidth / 2 &&
+                           y >= gedung.y - boxHeight / 2 && y <= gedung.y + boxHeight / 2;
+                });
+
+                if (draggingGedung) {
+                    offsetX = x - draggingGedung.x;
+                    offsetY = y - draggingGedung.y;
+                }
+            }
+        }
+    });
+
+    canvas.addEventListener('mousemove', (e) => {
+        if (mode === 'resize' && dragging && selectedGedung) {
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const deltaX = x - startX;
+            const deltaY = y - startY;
+
+            selectedGedung.width = Math.max(startWidth + deltaX, 10);
+            selectedGedung.height = Math.max(startHeight + deltaY, 10);
+            drawCanvas();
+        } else if (draggingGedung) {
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            draggingGedung.x = x - offsetX;
+            draggingGedung.y = y - offsetY;
+
+            drawCanvas();
+        }
+    });
+
+    canvas.addEventListener('mouseup', () => {
+        if (mode === 'resize' && dragging && selectedGedung) {
+            updateGedung(selectedGedung);
+        } else if (draggingGedung) {
+            updateGedung(draggingGedung);
+        }
+        dragging = false;
+        draggingGedung = null;
+        selectedGedung = null;
+    });
+
+    async function addGedung(x, y) {
+        const name = prompt('Masukkan nama ruangan:');
+        if (!name) return;
+
+        const gambargedungId = {{ $gambargedungs->id }};
+
+        const formData = new FormData();
+        formData.append('nama_ruangan', name);
+        formData.append('x', x);
+        formData.append('y', y);
+        formData.append('width', defaultSize);
+        formData.append('height', defaultSize);
+        formData.append('gambargedung_id', gambargedungId);
+
+        try {
+            const response = await fetch('/gedungs', {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken,
+                },
+                body: formData,
+            });
+
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+            const gedung = await response.json();
+            gedungs.push(gedung);
+            drawCanvas();
+        } catch (error) {
+            console.error('Error saat menambahkan gedung:', error);
+        }
+    }
+
+    async function updateGedung(gedung) {
+        const formData = new FormData();
+        formData.append('_method', 'PUT');
+        formData.append('nama_ruangan', gedung.nama_ruangan);
+        formData.append('x', gedung.x);
+        formData.append('y', gedung.y);
+        formData.append('width', gedung.width);
+        formData.append('height', gedung.height);
+        formData.append('gambargedung_id', gedung.gambargedung_id);
+
+        try {
+            const response = await fetch(`/gedungs/${gedung.id}`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken,
+                },
+                body: formData,
+            });
+
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            console.log('Data gedung berhasil diperbarui');
+        } catch (error) {
+            console.error('Error saat memperbarui gedung:', error);
+        }
+    }
+
+    async function fetchGedungs() {
+        try {
+            const response = await fetch('/gedungs');
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+            gedungs = await response.json();
+            drawCanvas();
+        } catch (error) {
+            console.error('Error saat memuat gedung:', error);
+        }
+    }
+
+    // Tambahkan mode baru
+document.getElementById('deleteMode').addEventListener('click', () => mode = 'delete');
+
+// Handle canvas click event untuk hapus gedung
+canvas.addEventListener('click', async (e) => {
+    if (mode !== 'delete') return; // Hanya jalan jika mode hapus aktif
+
+    const rect = canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    // Cari gedung yang diklik berdasarkan posisi
+    const clickedGedung = gedungs.find(gedung => {
+        const boxWidth = gedung.width || defaultSize;
+        const boxHeight = gedung.height || defaultSize;
+        return x >= gedung.x - boxWidth / 2 && x <= gedung.x + boxWidth / 2 &&
+               y >= gedung.y - boxHeight / 2 && y <= gedung.y + boxHeight / 2;
+    });
+
+    if (clickedGedung) {
+        // Konfirmasi sebelum menghapus
+        const confirmDelete = confirm(`Apakah Anda yakin ingin menghapus ruangan "${clickedGedung.nama_ruangan}"?`);
+        if (confirmDelete) {
+            try {
+                await deleteGedung(clickedGedung.id); // Hapus dari server
+                gedungs = gedungs.filter(gedung => gedung.id !== clickedGedung.id); // Hapus dari array lokal
+                drawCanvas(); // Render ulang canvas
+            } catch (error) {
+                console.error('Error saat menghapus gedung:', error);
+            }
+        }
+    }
+});
+
+// Fungsi untuk menghapus gedung dari server
+async function deleteGedung(id) {
+    try {
+        const response = await fetch(`/gedungs/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'X-CSRF-TOKEN': csrfToken // Tambahkan token CSRF
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        console.log(`Gedung dengan ID ${id} berhasil dihapus.`);
+    } catch (error) {
+        console.error('Error saat menghapus gedung dari server:', error);
+        throw error;
+    }
+}
+
+
+    document.getElementById('createMode').addEventListener('click', () => mode = 'create');
+    document.getElementById('resizeMode').addEventListener('click', () => mode = 'resize');
+
+    fetchGedungs();
+</script>
+@endsection

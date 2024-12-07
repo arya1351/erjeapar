@@ -9,9 +9,18 @@ class Gedung extends Model
 {
     use HasFactory;
 
-    protected $table = 'gedungs';
+    protected $table = 'gedungs'; // Nama tabel di database
+  
+    protected $fillable = [
+        'nama_ruangan',
+        'x',
+        'y',
+        'gambargedung_id',
+        'width',
+        'height',
+    ];
 
-    protected $fillable = ['gambargedung_id', 'nama_ruangan', 'area'];
+
 
     public function gambargedung()
     {
