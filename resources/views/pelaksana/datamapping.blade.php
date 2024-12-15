@@ -67,18 +67,6 @@
                             <span class="hide-menu">Laporan</span>
                         </a>
                     </li>
-                    <li class="nav-small-cap">
-                        <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                        <span class="hide-menu fst-italic">Data Sender</span>
-                    </li>
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="{{ route('pelaksana.datakirimlaporan') }}" aria-expanded="false">
-                            <span>
-                                <i class="ti ti-send"></i>
-                            </span>
-                            <span class="hide-menu">Kirim Laporan</span>
-                        </a>
-                    </li>
                 </ul>
             </nav>
             <!-- End Sidebar navigation -->
@@ -93,7 +81,7 @@
         <div class="container-fluid">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title fw-semibold mb-4">Forms</h5>
+                    <h5 class="card-title fw-semibold mb-4">Data Layout Gedung</h5>
                     <div class="d-flex justify-content-end">
                         <a type="button" href="{{ route('pelaksana.tambahlayoutgedung') }}"
                             class="btn btn-primary justify-content-end m-1">Tambah Layout Gedung</a>
@@ -137,7 +125,7 @@
                                             </button>
                                             <!-- Button trigger modal -->
                                             <button type="button" class="btn btn-Danger" data-bs-toggle="modal"
-                                                data-bs-target="#deleteModal">
+                                                data-bs-target="#deleteModal{{ $gambargedung->id }}">
                                                 Delete
                                             </button>
                                         </td>
@@ -164,17 +152,20 @@
                                                         <div class="row">
                                                             <div class="col">
                                                                 <ul>
-                                                                    @foreach ($gedungs as $gedung)
+                                                                    @forelse ($gambargedung->gedungs as $gedung)
                                                                         <a href="#" class="text-center text-white"
                                                                             onclick="selectGedung({{ $gedung['id'] }})">
 
                                                                             <li id="gedungItem{{ $gedung['id'] }}"
-                                                                                class="alert bg-primary d-flex align-items-center justify-content-between mx-4 border text-white">
+                                                                                class="alert d-flex align-items-center justify-content-between mx-4 border text-black">
                                                                                 {{ $gedung['nama_ruangan'] }}
                                                                                 {{-- <button type="button" class="btn btn-warning justify-content-end ti ti-trash" data-bs-toggle="modal" data-bs-target="#deletelayoutmodal{{ $gedung['id'] }}"> --}}
                                                                             </li>
                                                                         </a>
-                                                                    @endforeach
+                                                                    @empty
+                                                                        <p class="p-2 text-center">Data mapping belum
+                                                                            tersedia.</p>
+                                                                    @endforelse
                                                                 </ul>
 
                                                             </div>
@@ -195,17 +186,17 @@
                                     </div>
 
                                     <!-- Modal -->
-                                    <div class="modal fade" id="deleteModal" tabindex="-1"
+                                    <div class="modal fade" id="deleteModal{{ $gambargedung->id }}" tabindex="-1"
                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Hapus Layout Gedung</h1>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <p>Apa kamu yakin ingin menghapus layout gambar gedung ini?</p>
+                                                    <p>Apa kamu yakin ingin menghapus layout gambar gedung ini? {{ $gambargedung->id }}</p>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
@@ -217,6 +208,7 @@
                                                         <button type="submit" class="btn btn-Danger">
                                                             Delete
                                                         </button>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
@@ -276,11 +268,9 @@
                         const listItem = document.getElementById(`gedungItem${gedung.id}`);
                         if (listItem) {
                             if (gedung.id === gedungId) {
-                                listItem.classList.remove("bg-primary");
-                                listItem.classList.add("bg-danger");
+                                listItem.classList.add("bg-primary","text-white");
                             } else {
-                                listItem.classList.remove("bg-danger");
-                                listItem.classList.add("bg-primary");
+                                listItem.classList.remove("bg-primary","text-white");
                             }
                         }
                     });
@@ -311,7 +301,7 @@
                                 ctx.beginPath();
                                 ctx.rect(mapping.x - width / 2, mapping.y - height / 2, width, height);
                                 ctx.fillStyle = mapping.id === activeGedungId ?
-                                    'rgba(255, 0, 0, 0.5)' // Warna merah untuk gedung aktif
+                                    'rgba(0, 128, 0, 0.6)' // Warna hijau untuk gedung aktif
                                     :
                                     'rgba(55, 55, 255, 0.5)'; // Warna biru untuk gedung lain
                                 ctx.fill();

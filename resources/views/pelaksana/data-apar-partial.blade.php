@@ -1,3 +1,4 @@
+<div id="data-table">
 <table class="text-nowrap mb-0 table align-middle">
     <thead class="text-dark fs-4">
         <tr>
@@ -30,7 +31,7 @@
             </th>
         </tr>
     </thead>
-    <tbody>
+    <tbody id>
         @forelse ($apars as $apar)
             <tr>
                 <td class="border-bottom-0">
@@ -55,7 +56,7 @@
                     </div>
                 </td>
                 <td class="border-bottom-0">
-                    <p class="fw-normal mb-0">{{ $apar->tanggal_exp }}</p>
+                    <p class="fw-normal mb-0">{{  \Carbon\Carbon::parse($apar->tanggal_exp)->format('d F Y') }}</p>
                 </td>
                 <td class="border-bottom-0">
                     <p class="fw-normal d-inline-block text-truncate mb-0" style="max-width: 100px;">
@@ -142,5 +143,6 @@
 {{ $apars->links('vendor.pagination.bootstrap-5') }}
 </div>
 
+</div>
 </div>
 </div>

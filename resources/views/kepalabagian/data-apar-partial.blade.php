@@ -1,3 +1,4 @@
+<div id="data-table">
 <table class="text-nowrap mb-0 table align-middle">
     <thead class="text-dark fs-4">
         <tr>
@@ -55,7 +56,7 @@
                     </div>
                 </td>
                 <td class="border-bottom-0">
-                    <p class="fw-normal mb-0">{{ $apar->tanggal_exp }}</p>
+                    <p class="fw-normal mb-0">{{  \Carbon\Carbon::parse($apar->tanggal_exp)->format('d F Y') }}</p>
                 </td>
                 <td class="border-bottom-0">
                     <p class="fw-normal d-inline-block text-truncate mb-0" style="max-width: 100px;">
@@ -70,45 +71,11 @@
                         data-bs-target="#modalDetail{{ $apar->id }}">
                         Detail
                     </button>
-                    
-                    <!-- Button trigger modal -->
-                    <button type="submit" class="btn btn-Danger" data-bs-toggle="modal"
-                        data-bs-target="#deleteModal{{ $apar->id }}">
-                        Delete
-                    </button>
                 </td>
             </tr>
-
-            <div class="modal fade" id="deleteModal{{ $apar->id }}" tabindex="-1"
+            
+            <div class="modal fade" id="modaldetail{{ $apar->id }}" tabindex="-1"
                 aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <p>Apa kamu yakin ingin menghapus Apar dengan nomer apar
-                                {{ $apar->no_apar }}</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <form action="{{ route('kepalabagian.apars.destroy', $apar->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-Danger">
-                                    Delete
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="modal fade" id="modaldetail{{ $apar->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -131,7 +98,7 @@
                         </div>
                     </div>
                 </div>
-              </div>
+            </div>
         @empty
             <div>
 

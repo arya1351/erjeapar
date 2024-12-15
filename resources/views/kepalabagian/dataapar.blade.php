@@ -8,7 +8,8 @@
         <div>
             <div class="brand-logo d-flex align-items-center justify-content-between mx-auto">
                 <div class="row py-4">
-                    <a href="{{ route('kepalabagian.dashboard') }}" class="text-nowrap logo-img justify-content-center mx-auto">
+                    <a href="{{ route('kepalabagian.dashboard') }}"
+                        class="text-nowrap logo-img justify-content-center mx-auto">
                         <img src="{{ asset('templates') }}/src/assets/images/logos/logoRJ.png" width="180" alt="" />
                     </a>
                     <a href="{{ route('kepalabagian.dashboard') }}" class="fs-6 fw-bolder text-center text-black">
@@ -89,17 +90,13 @@
         <div class="container-fluid">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title fw-semibold mb-4">Forms</h5>
-                    <div class="d-flex justify-content-end mx-2">
-                        <a type="button" href="{{ route('kepalabagian.tambahapar') }}"
-                            class="btn btn-primary m-1 justify-content-end">Tambah Data Apar</a>
-                            
-                    </div>
+                    <h5 class="card-title fw-semibold mb-4">Data Apar</h5>
                     <div class="table-responsive">
-                        <div class="d-flex mx-4 justify-content-between my-auto">
+                        <div class="d-flex justify-content-between mx-4 my-auto">
                             <form class="d-flex" action="" method="GET">
-                            <input class="form-control" list="datalistOptions" name="search" id="search" value="{{ request('search') }}" placeholder="Type to search...">
-                        </form>
+                                <input class="form-control" list="datalistOptions" name="search" id="search"
+                                    value="{{ request('search') }}" placeholder="Type to search...">
+                            </form>
                             @foreach ($apars as $apar)
                                 <datalist id="datalistOptions">
                                     <option value="{{ $apar->jenis }}">
@@ -108,19 +105,55 @@
                                     <option value="{{ $apar->tanggal_exp }}">
                                     <option value="{{ $apar->perawatan }}">
                                     <option value="{{ $apar->keterangan }}">
-                                    <option value="{{ $apar->gedungs->nama_ruangan  }}">
-                                    </datalist>
+                                    <option value="{{ $apar->gedungs->nama_ruangan }}">
+                                </datalist>
                             @endforeach
-                        <a type="button" href="dataapar-export"
-                            class="btn btn-warning m-1 justify-content-end">Exports</a>
+                            <form action="{{ route('kepalabagian.dataapar.export') }}" method="GET">
+                                <input type="hidden" name="search" id="search-hidden" value="">
+                                <button type="submit" class="btn btn-warning">Export</button>
+                            </form>
                         </div>
-                      
-                            <div id="data-table">
-                                @include('kepalabagian.data-apar-partial', ['apars' => $apars])
-                            </div>
-                       
 
+                        @include('kepalabagian.data-apar-partial', ['apars' => $apars])
 
-            <script src="{{ asset('templates') }}/src/assets/libs/apexcharts/dist/apexcharts.min.js"></script>
-            <script src="{{ asset('templates') }}/src/assets/libs/simplebar/dist/simplebar.js"></script>
-        @endsection
+                        <script src="{{ asset('templates') }}/src/assets/libs/apexcharts/dist/apexcharts.min.js"></script>
+                        <script src="{{ asset('templates') }}/src/assets/libs/simplebar/dist/simplebar.js"></script>
+                    @endsection
+
+                    @section('script')
+                        <script>
+                            $(document).ready(function() {
+                                $('#search').on('keyup', function() {
+                                    let query = $(this).val();
+                                    $.ajax({
+                                        url: "{{ route('kepalabagian.dataapar.search') }}",
+                                        type: "GET",
+                                        data: {
+                                            search: query
+                                        },
+                                        success: function(data) {
+                                            $('#data-table').html(data);
+                                        },
+                                        error: function() {
+                                            alert('Terjadi kesalahan. Silakan coba lagi.');
+                                        }
+                                    });
+                                });
+                            });
+                        </script>
+
+                        <script>
+                            document.getElementById('search').addEventListener('keydown', function(event) {
+                                if (event.key === 'Enter') {
+                                    event.preventDefault(); // Mencegah aksi Enter
+                                }
+                            });
+                        </script>
+                        <script>
+                            $(document).ready(function() {
+                                $('#search').on('input', function() {
+                                    $('#search-hidden').val($(this).val());
+                                });
+                            });
+                        </script>
+                    @endsection

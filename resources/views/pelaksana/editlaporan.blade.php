@@ -1,4 +1,4 @@
-<title>Pelaksana-Tambah Kirim Laporan</title>
+<title>Dashboard-Tambah Laporan</title>
 
 @extends('layouts.app')
 @section('sidebar')
@@ -70,28 +70,58 @@
     </aside>
 @endsection
 
-
 @section('content')
-   
     <div class="container-fluid">
         <div class="card">
             @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="card-body">
-                <h5 class="card-title fw-semibold mb-4">Kirim Laporan</h5>
-                <form action="{{ route('pelaksana.kirimlaporans.store') }}" method="POST" enctype="multipart/form-data">
+                <div class="d-flex justify-content-between">
+                    <h5 class="card-title fw-semibold mb-4">Edit Laporan</h5>
+                </div>
+                <form action="{{ route('pelaksana.laporans.update', $laporans->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
+                    @method('PUT')
                     <div class="mb-3">
-                        <label for="inputlayoutgedung" class="form-label">Masukkan File Laporan</label>
-                        <input type="file" name="file_laporan" class="form-control" id="fileInput" accept=".xlsx,.xls,.doc, .docx,.ppt, .pptx,.txt,.pdf"
-                            aria-describedby="FileHelp">
+                        <label for="jenislaporan" class="form-label">Masukkan Jenis Laporan</label>
+                        <select name="jenislaporan" id="jenislaporan" class="form-control form-select">
+                            <option value="">Jenis Laporan</option>
+                            <option value="Laporan Pembelian dan Perbaikan Apar">Laporan Pembelian dan Perbaikan Apar
+                            </option>
+                            <option value="Laporan Pengisian Ulang Apar">Laporan Pengisian Ulang Apar</option>
+                        </select>
+
+                    </div>
+                    <div class="mb-3">
+                        <label for="pembuat" class="form-label">Masukkan Nama Pembuat Laporan</label>
+                        <input type="text" name="pembuat" class="form-control" id="pembuat"
+                        value="{{ old('pembuat', $laporans->pembuat) }}">
+
+                    </div>
+                    <div class="mb-3">
+                        <label for="kepalabagian" class="form-label">Masukkan Nama Kepala Bagian</label>
+                        <input type="text" name="kepalabagian" class="form-control" id="kepalabagian"
+                        value="{{ old('kepalabagian', $laporans->kepalabagian) }}">
+
+                    </div>
+                    <div class="mb-3">
+                        <label for="hrd" class="form-label">Masukkan Nama HRD</label>
+                        <input type="text" name="hrd" class="form-control" id="hrd"
+                        value="{{ old('hrd', $laporans->hrd) }}">
+
+                    </div>
+                    <div class="mb-3">
+                        <label for="tanggal_pengajuan" class="form-label">Tanggal Pengajuan</label>
+                        <input type="date" name="tanggal_pengajuan" class="form-control" id="tanggal_pengajuan"
+                        value="{{ old('tanggal_pengajuan', $laporans->tanggal_pengajuan) }}">
+
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>

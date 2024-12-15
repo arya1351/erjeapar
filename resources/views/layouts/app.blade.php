@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/png" href="{{ asset('/assets/images/logos/logoRJ.png') }}" />
+    <link rel="shortcut icon" type="image/png" href="{{ asset('templates') }}/src/assets/images/logos/favicon.png" />
     <link rel="stylesheet" href="{{ asset('templates') }}/src/assets/css/styles.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -81,23 +81,45 @@
     <script src="{{ asset('templates') }}/src/assets/js/app.min.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#search').on('keyup', function() {
-                let query = $(this).val();
-                $.ajax({
-                    url: "{{ route('dataapar.search') }}",
-                    type: "GET",
-                    data: {
-                        search: query
-                    },
-                    success: function(data) {
-                        $('#data-table').html(data);
-                    },
-                    error: function() {
-                        alert('Terjadi kesalahan. Silakan coba lagi.');
-                    }
-                });
+   @yield('script')
+
+    
+    <!-- sweetalert -->
+    <script src="{{ asset('sweetalert/sweetalert2.all.min.js') }}"></script>
+    <!-- sweetalert End -->
+    <!-- konfirmasi success-->
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil!',
+                text: "{{ session('success') }}"
+            });
+        </script>
+    @endif
+    <!-- konfirmasi success End-->
+    <script type="text/javascript">
+        //Konfirmasi delete 
+        $('.show_confirm').click(function(event) {
+            var form = $(this).closest("form");
+            var konfdelete = $(this).data("konf-delete");
+            event.preventDefault();
+            Swal.fire({
+                title: 'Konfirmasi Hapus Data?',
+                html: "Data yang dihapus <strong>" + konfdelete + "</strong> tidak dapat dikembalikan!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, dihapus',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire('Terhapus!', 'Data berhasil dihapus.', 'success')
+                        .then(() => {
+                            form.submit();
+                        });
+                }
             });
         });
     </script>

@@ -61,18 +61,6 @@
                             <span class="hide-menu">Laporan</span>
                         </a>
                     </li>
-                    <li class="nav-small-cap">
-                        <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                        <span class="hide-menu fst-italic">Data Sender</span>
-                    </li>
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="{{ route('pelaksana.datakirimlaporan') }}" aria-expanded="false">
-                            <span>
-                                <i class="ti ti-send"></i>
-                            </span>
-                            <span class="hide-menu">Kirim Laporan</span>
-                        </a>
-                    </li>
                 </ul>
             </nav>
             <!-- End Sidebar navigation -->

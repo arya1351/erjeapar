@@ -22,7 +22,32 @@ class PelaksanaController extends Controller
 {
     public function index()
     {
-        return view('pelaksana.dashboard');
+        $apars = Apar::count();
+        $mappings = Gedung::count();
+        $laporans = Laporan::count();
+        $gambargedungs = Gambargedung::all();
+
+        if ($gambargedungs->isEmpty()) {
+            return view('pelaksana.dashboard', [
+                'apars' => $apars,
+                'mappings' => $mappings,
+                'laporans' => $laporans,
+                'gambargedungs' => [], // Kirim data kosong
+            ]);
+        }
+
+        $gedungs = Gedung::with('gambargedung')->get()->toArray();
+        return view('pelaksana.dashboard', compact('gedungs', 'gambargedungs', 'apars', 'mappings', 'laporans'));
+    }
+
+    public function dashboardgetMapping($gambargedungId)
+    {
+        $gedungs = Gedung::where('gambargedung_id', $gambargedungId)->get();
+        if ($gedungs->isEmpty()) {
+            return response()->json(['message' => 'Gedung tidak ditemukan'], 404);
+        }
+
+        return response()->json($gedungs);
     }
 
     // Function Apar Start
@@ -60,6 +85,7 @@ class PelaksanaController extends Controller
         $gedungs = Gedung::all();
         return view('pelaksana.tambahapar', compact('gedungs'));
     }
+    
 
     public function storeapar(Request $request): RedirectResponse
     {
@@ -78,9 +104,32 @@ class PelaksanaController extends Controller
 
         return redirect()->route('pelaksana.dataapar')->with('success', 'Data Apar berhasil disimpan.');
     }
-    // public function editapar(Request $request){
 
-    // }
+    public function editapar($id)
+    {
+        $gedungs = Gedung::all();
+        $apars = Apar::findOrFail($id); // Ambil data apar berdasarkan ID
+        return view('pelaksana.editapar', compact('gedungs', 'apars'));
+    }
+
+    public function updateapar(Request $request, $id): RedirectResponse
+    {
+        // dd($request->all());
+        $request->validate([
+            'jenis' => 'required|string|max:255',
+            'merek' => 'nullable|string|max:255',
+            'gedung_id' => 'required|exists:gedungs,id',
+            'no_apar' => 'required|string|max:255',
+            'tanggal_exp' => 'required|date',
+            'perawatan' => 'nullable|string|max:255',
+            'keterangan' => 'nullable|string|max:255',
+        ]);
+
+        $apar = Apar::findOrFail($id); // Cari data apar berdasarkan ID
+        $apar->update($request->all()); // Perbarui data apar
+
+        return redirect()->route('pelaksana.dataapar')->with('success', 'Data Apar berhasil disimpan.');
+    }
 
     public function destroyapar(Apar $apar, $id)
     {
@@ -92,9 +141,10 @@ class PelaksanaController extends Controller
 
     // function export and import apar
 
-    public function exportapar()
+    public function exportapar(Request $request)
     {
-        return Excel::download(new AparsExport(), 'apar-' . Carbon::now()->timestamp . '.xlsx');
+        $search = $request->input('search');
+        return Excel::download(new AparsExport($search), 'apar-' . now()->format('YmdHis') . '.xlsx');
     }
 
     public function viewimportapar()
@@ -129,8 +179,19 @@ class PelaksanaController extends Controller
         return redirect()->route('pelaksana.datamapping')->with('success', 'Gambar Gedung berhasil ditambahkan.');
     }
 
-    public function destroygedung(Gambargedung $gambargedung)
+    public function destroygedung($id)
     {
+        $gambargedung = Gambargedung::findOrFail($id);
+
+        // Path file gambar
+        $imagePath = public_path('images/' . $gambargedung->image_gedung);
+
+        // Hapus file jika ada
+        if (file_exists($imagePath)) {
+            unlink($imagePath); // Menghapus file gambar dari folder
+        }
+
+        // Hapus data dari database
         $gambargedung->delete();
         return redirect()->route('pelaksana.datamapping')->with('success', 'Gambar Gedung berhasil dihapus.');
     }
@@ -264,6 +325,29 @@ class PelaksanaController extends Controller
         return redirect()->route('pelaksana.datalaporan')->with('success', 'Laporan berhasil ditambah.');
     }
 
+    public function editlaporan($id)
+    {
+        $laporans = Laporan::findOrFail($id);
+        return view('pelaksana.editlaporan', compact('laporans'));
+    }
+
+    public function updatelaporan(Request $request, $id): RedirectResponse
+    {
+        // dd($request->all());
+        $request->validate([
+            'jenislaporan' => 'required|string|min:1|max:255',
+            'pembuat' => 'required|string|min:1|max:255',
+            'kepalabagian' => 'required|string|min:1|max:255',
+            'hrd' => 'required|string|min:1',
+            'tanggal_pengajuan' => 'required',
+        ]);
+
+        $laporans = Laporan::findOrFail($id);
+        $laporans->update($request->all());
+
+        return redirect()->route('pelaksana.datalaporan')->with('success', 'Data Apar berhasil disimpan.');
+    }
+
     public function destroylaporan($id)
     {
         $laporan = Laporan::findOrFail($id);
@@ -288,11 +372,11 @@ class PelaksanaController extends Controller
     }
 
     public function storekomponen(Request $request)
-    { 
+    {
         // Validasi data input
         $validatedData = $request->validate([
             'komponen' => 'required|string|max:255',
-            'jumlah' => 'required|integer|min:1|max:10',
+            'jumlah' => 'required|integer|min:1',
             'keterangan' => 'required|string|min:1|max:255',
             'satuan' => 'required|string|min:1',
             'laporan_id' => 'required|exists:laporans,id', // Memastikan laporan_id valid
@@ -305,6 +389,15 @@ class PelaksanaController extends Controller
         return redirect()->route('pelaksana.datalaporan')->with('success', 'Komponen berhasil ditambah.');
     }
 
+    public function destroykomponen($id)
+    {
+        Log::info("ID diterima di destroykomponen: $id");
+        $komponen = komponen::findOrFail($id);
+        $komponen->delete();
+
+        return redirect()->route('pelaksana.datalaporan')->with('success', 'Komponen berhasil dihapus.');
+    }
+
     // function print out
     public function printlaporan($id)
     {
@@ -315,35 +408,4 @@ class PelaksanaController extends Controller
     // function komponen stop
 
     // function Laporan Stop
-
-    // kirim laporan start 
-
-    public function datakirimlaporan(){
-        return view ('pelaksana.datakirimlaporan');
-    }
-
-    public function createkirimlaporan(){
-        return view('pelaksana.tambahkirimlaporan');
-    }
-
-    public function download(Filelaporan $filelaporan)
-    {
-        return response()->download(storage_path('app/public/' . $filelaporan->file_laporan));
-    }
-
-    public function storekirimlaporan(Request $request)
-    {
-        $request->validate([
-            'file_laporan' => 'required|mimes:pdf|max:2048', // Validasi file
-        ]);
-
-        $file = $request->file('file');
-        $filelaporan = $file->store('filelaporans', 'public'); // Simpan file ke storage/public/pdfs
-
-        Filelaporan::create([
-            'file_laporan' => $filelaporan,
-        ]);
-
-        return redirect()->route('pelaksana.datakirimlaporan')->with('success', 'PDF berhasil diupload.');
-    }
 }

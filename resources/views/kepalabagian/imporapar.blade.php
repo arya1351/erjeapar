@@ -5,13 +5,15 @@
     <aside class="left-sidebar">
         <!-- Sidebar scroll-->
         <div>
-            <div class="brand-logo d-flex align-items-center justify-content-between mx-auto row">
-                <a href="{{ route('kepalabagian.dashboard') }}" class="text-nowrap logo-img justify-content-center mx-auto">
-                    <img src="{{ asset('templates') }}/src/assets/images/logos/logoRJ.png" width="180" alt="" />
-                </a>
-                <a href="{{ route('kepalabagian.dashboard') }}" class="text-center text-black fs-6 fw-bolder">
-                    Monitoring Apar
-                </a>
+            <div class="brand-logo d-flex align-items-center justify-content-between mx-auto">
+                <div class="row py-4">
+                    <a href="{{ route('kepalabagian.dashboard') }}" class="text-nowrap logo-img justify-content-center mx-auto">
+                        <img src="{{ asset('templates') }}/src/assets/images/logos/logoRJ.png" width="180" alt="" />
+                    </a>
+                    <a href="{{ route('kepalabagian.dashboard') }}" class="fs-6 fw-bolder text-center text-black">
+                        Monitoring Apar
+                    </a>
+                </div>
                 <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
                     <i class="ti ti-x fs-8"></i>
                 </div>
@@ -21,7 +23,7 @@
                 <ul id="sidebarnav">
                     <li class="nav-small-cap">
                         <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                        <span class="hide-menu">Home</span>
+                        <span class="hide-menu fst-italic">Home</span>
                     </li>
                     <li class="sidebar-item {{ Request::is('kepalabagian/dashboard') ? 'active' : '' }}">
                         <a class="sidebar-link" href="{{ route('kepalabagian.dashboard') }}" aria-expanded="false">
@@ -33,7 +35,7 @@
                     </li>
                     <li class="nav-small-cap">
                         <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                        <span class="hide-menu">Data Master</span>
+                        <span class="hide-menu fst-italic">Data Master</span>
                     </li>
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="{{ route('kepalabagian.dataapar') }}" aria-expanded="false">
@@ -52,11 +54,23 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="#" aria-expanded="false">
+                        <a class="sidebar-link" href="{{ route('kepalabagian.datalaporan') }}" aria-expanded="false">
                             <span>
                                 <i class="ti ti-article"></i>
                             </span>
                             <span class="hide-menu">Laporan</span>
+                        </a>
+                    </li>
+                    <li class="nav-small-cap">
+                        <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                        <span class="hide-menu fst-italic">Data Sender</span>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('kepalabagian.datakirimlaporan') }}" aria-expanded="false">
+                            <span>
+                                <i class="ti ti-send"></i>
+                            </span>
+                            <span class="hide-menu">Kirim Laporan</span>
                         </a>
                     </li>
                 </ul>

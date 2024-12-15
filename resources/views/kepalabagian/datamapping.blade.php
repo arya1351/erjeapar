@@ -6,13 +6,16 @@
     <aside class="left-sidebar">
         <!-- Sidebar scroll-->
         <div>
-            <div class="brand-logo d-flex align-items-center justify-content-between mx-auto row">
-                <a href="{{ route('kepalabagian.dashboard') }}" class="text-nowrap logo-img justify-content-center mx-auto">
-                    <img src="{{ asset('templates') }}/src/assets/images/logos/logoRJ.png" width="180" alt="" />
-                </a>
-                <a href="{{ route('kepalabagian.dashboard') }}" class="text-center text-black fs-6 fw-bolder">
-                    Monitoring Apar
-                </a>
+            <div class="brand-logo d-flex align-items-center justify-content-between mx-auto">
+                <div class="row py-4">
+                    <a href="{{ route('kepalabagian.dashboard') }}"
+                        class="text-nowrap logo-img justify-content-center mx-auto">
+                        <img src="{{ asset('templates') }}/src/assets/images/logos/logoRJ.png" width="180" alt="" />
+                    </a>
+                    <a href="{{ route('kepalabagian.dashboard') }}" class="fs-6 fw-bolder text-center text-black">
+                        Monitoring Apar
+                    </a>
+                </div>
                 <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
                     <i class="ti ti-x fs-8"></i>
                 </div>
@@ -22,7 +25,7 @@
                 <ul id="sidebarnav">
                     <li class="nav-small-cap">
                         <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                        <span class="hide-menu">Home</span>
+                        <span class="hide-menu fst-italic">Home</span>
                     </li>
                     <li class="sidebar-item {{ Request::is('kepalabagian/dashboard') ? 'active' : '' }}">
                         <a class="sidebar-link" href="{{ route('kepalabagian.dashboard') }}" aria-expanded="false">
@@ -34,7 +37,7 @@
                     </li>
                     <li class="nav-small-cap">
                         <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                        <span class="hide-menu">Data Master</span>
+                        <span class="hide-menu fst-italic">Data Master</span>
                     </li>
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="{{ route('kepalabagian.dataapar') }}" aria-expanded="false">
@@ -53,11 +56,23 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="#" aria-expanded="false">
+                        <a class="sidebar-link" href="{{ route('kepalabagian.datalaporan') }}" aria-expanded="false">
                             <span>
                                 <i class="ti ti-article"></i>
                             </span>
                             <span class="hide-menu">Laporan</span>
+                        </a>
+                    </li>
+                    <li class="nav-small-cap">
+                        <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+                        <span class="hide-menu fst-italic">Data Sender</span>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="{{ route('kepalabagian.datakirimlaporan') }}" aria-expanded="false">
+                            <span>
+                                <i class="ti ti-send"></i>
+                            </span>
+                            <span class="hide-menu">Kirim Laporan</span>
                         </a>
                     </li>
                 </ul>
@@ -74,11 +89,7 @@
         <div class="container-fluid">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title fw-semibold mb-4">Forms</h5>
-                    <div class="d-flex justify-content-end">
-                        <a type="button" href="{{ route('kepalabagian.tambahlayoutgedung') }}"
-                            class="btn btn-primary justify-content-end m-1">Tambah Layout Gedung</a>
-                    </div>
+                    <h5 class="card-title fw-semibold mb-4">Data Layout Gedung</h5>
                     <div class="table-responsive">
                         <table class="text-nowrap mb-0 table align-middle">
                             <thead class="text-dark fs-4">
@@ -117,10 +128,7 @@
                                                 Detail
                                             </button>
                                             <!-- Button trigger modal -->
-                                            <button type="button" class="btn btn-Danger" data-bs-toggle="modal"
-                                                data-bs-target="#deleteModal">
-                                                Delete
-                                            </button>
+
                                         </td>
                                     </tr>
                                     <!-- Modal detail -->
@@ -138,24 +146,22 @@
                                                     <div class="col">
                                                         <div class="d-flex justify-content-between mx-4 py-4">
                                                             <h1 class="mx-4">Daftar Mapping</h1>
-                                                            <a href="{{ route('kepalabagian.tambahmapping', $gambargedung->id) }}"
-                                                                class="btn btn-success my-auto">Tambah, Edit & Hapus
-                                                                Mapping</a>
                                                         </div>
                                                         <div class="row">
                                                             <div class="col">
                                                                 <ul>
-                                                                    @foreach ($gedungs as $gedung)
+                                                                    @forelse ($gambargedung->gedungs as $gedung)
                                                                         <a href="#" class="text-center text-white"
                                                                             onclick="selectGedung({{ $gedung['id'] }})">
-
                                                                             <li id="gedungItem{{ $gedung['id'] }}"
-                                                                                class="alert bg-primary d-flex align-items-center justify-content-between mx-4 border text-white">
+                                                                                class="alert d-flex align-items-center justify-content-between mx-4 border text-black">
                                                                                 {{ $gedung['nama_ruangan'] }}
                                                                                 {{-- <button type="button" class="btn btn-warning justify-content-end ti ti-trash" data-bs-toggle="modal" data-bs-target="#deletelayoutmodal{{ $gedung['id'] }}"> --}}
                                                                             </li>
                                                                         </a>
-                                                                    @endforeach
+                                                                        @empty
+                                                                        <p class="text-center p-2">Data mapping belum tersedia.</p>
+                                                                    @endforelse
                                                                 </ul>
 
                                                             </div>
@@ -166,38 +172,6 @@
                                                             height="1080" alt="Image Preview"
                                                             class="img-fluid border-3 justify-content-center mx-auto mt-3 border border-black"style="transform: scale(0.75); transform-origin: center"></canvas>
                                                     </div>
-                                                </div>
-                                                {{-- <div class="modal-footer">
-                                                    <button type="button" class="btn btn-danger"
-                                                        data-bs-dismiss="modal">Close</button>
-                                                </div> --}}
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="deleteModal" tabindex="-1"
-                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p>Apa kamu yakin ingin menghapus layout gambar gedung ini?</p>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-bs-dismiss="modal">Close</button>
-                                                    <form action="{{ route('gambargedungs.destroy', $gambargedung->id) }}"
-                                                        method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-Danger">
-                                                            Delete
-                                                        </button>
                                                 </div>
                                             </div>
                                         </div>
@@ -257,11 +231,9 @@
                         const listItem = document.getElementById(`gedungItem${gedung.id}`);
                         if (listItem) {
                             if (gedung.id === gedungId) {
-                                listItem.classList.remove("bg-primary");
-                                listItem.classList.add("bg-danger");
+                                listItem.classList.add("bg-primary","text-white");
                             } else {
-                                listItem.classList.remove("bg-danger");
-                                listItem.classList.add("bg-primary");
+                                listItem.classList.remove("bg-primary","text-white");
                             }
                         }
                     });
@@ -292,7 +264,7 @@
                                 ctx.beginPath();
                                 ctx.rect(mapping.x - width / 2, mapping.y - height / 2, width, height);
                                 ctx.fillStyle = mapping.id === activeGedungId ?
-                                    'rgba(255, 0, 0, 0.5)' // Warna merah untuk gedung aktif
+                                    'rgba(0, 128, 0, 0.6)' // Warna hijau untuk gedung aktif
                                     :
                                     'rgba(55, 55, 255, 0.5)'; // Warna biru untuk gedung lain
                                 ctx.fill();

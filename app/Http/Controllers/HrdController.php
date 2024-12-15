@@ -3,15 +3,32 @@
 namespace App\Http\Controllers;
 
 use App\Models\Apar;
+use App\Models\Filelaporan;
 use App\Models\Gambargedung;
 use App\Models\Gedung;
+use App\Models\Laporan;
 use Illuminate\Http\Request;
 
 class HrdController extends Controller
 {
     public function dashboard()
     {
-        return view('hrd.dashboard');
+        $apars = Apar::count();
+        $mappings = Gedung::count();
+        $filelaporans = Filelaporan::count();
+        $gambargedungs = Gambargedung::all();
+        $gedungs = Gedung::with('gambargedung')->get()->toArray();
+        return view('hrd.dashboard',compact('gedungs', 'gambargedungs', 'apars', 'mappings', 'filelaporans'));
+    }
+    public function dashboardgetMapping($gambargedungId)
+    {
+
+        $gedungs = Gedung::where('gambargedung_id', $gambargedungId)->get();
+        if ($gedungs->isEmpty()) {
+            return response()->json(['message' => 'Gedung tidak ditemukan'], 404);
+        }
+
+        return response()->json($gedungs);
     }
 
     public function dataapar(){
@@ -42,9 +59,6 @@ class HrdController extends Controller
         return view('hrd.data-apar-partial', compact('apars'))->render();
     }
 
-    public function laporanhrd(){
-        return view('');
-    }
 
     // function Mapping Start
     public function hrddatamapping()
@@ -64,5 +78,17 @@ class HrdController extends Controller
         }
 
         return response()->json($gedungs);
+    }
+
+    public function pengajuanlaporan(){
+        $filelaporans = Filelaporan::paginate(5);
+
+        return view ('hrd.datapengajuan', compact('filelaporans'));
+    }
+    
+    public function showpdf(Filelaporan $filelaporan, $id)
+    {
+        $filelaporan = Filelaporan::findOrFail($id);
+        return response()->file(storage_path('app/public/' . $filelaporan->file_laporan));
     }
 }

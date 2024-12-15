@@ -62,7 +62,7 @@
                         <span class="hide-menu">Data Transaction</span>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="#" aria-expanded="false">
+                        <a class="sidebar-link" href="{{ route('hrd.datapengajuan') }}" aria-expanded="false">
                             <span>
                                 <i class="ti ti-article"></i>
                             </span>
@@ -83,7 +83,7 @@
         <div class="container-fluid">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title fw-semibold mb-4">Forms</h5>
+                    <h5 class="card-title fw-semibold mb-4">Data Layout Gedung</h5>
 
                     <div class="table-responsive">
                         <table class="text-nowrap mb-0 table align-middle">
@@ -151,9 +151,8 @@
                                                                     @foreach ($gedungs as $gedung)
                                                                         <a href="#" class="text-center text-white"
                                                                             onclick="selectGedung({{ $gedung['id'] }})">
-
                                                                             <li id="gedungItem{{ $gedung['id'] }}"
-                                                                                class="alert bg-primary d-flex align-items-center justify-content-between mx-4 border text-white">
+                                                                                class="alert d-flex align-items-center justify-content-between mx-4 border text-black">
                                                                                 {{ $gedung['nama_ruangan'] }}
                                                                                 {{-- <button type="button" class="btn btn-warning justify-content-end ti ti-trash" data-bs-toggle="modal" data-bs-target="#deletelayoutmodal{{ $gedung['id'] }}"> --}}
                                                                             </li>
@@ -228,11 +227,9 @@
                         const listItem = document.getElementById(`gedungItem${gedung.id}`);
                         if (listItem) {
                             if (gedung.id === gedungId) {
-                                listItem.classList.remove("bg-primary");
-                                listItem.classList.add("bg-danger");
+                                listItem.classList.add("bg-primary", "text-white");
                             } else {
-                                listItem.classList.remove("bg-danger");
-                                listItem.classList.add("bg-primary");
+                                listItem.classList.remove("bg-primary", "text-white");
                             }
                         }
                     });
@@ -263,7 +260,7 @@
                                 ctx.beginPath();
                                 ctx.rect(mapping.x - width / 2, mapping.y - height / 2, width, height);
                                 ctx.fillStyle = mapping.id === activeGedungId ?
-                                    'rgba(255, 0, 0, 0.5)' // Warna merah untuk gedung aktif
+                                    'rgba(0, 128, 0, 0.6)' // Warna hijau untuk gedung aktif
                                     :
                                     'rgba(55, 55, 255, 0.5)'; // Warna biru untuk gedung lain
                                 ctx.fill();

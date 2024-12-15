@@ -62,18 +62,6 @@
                             <span class="hide-menu">Laporan</span>
                         </a>
                     </li>
-                    <li class="nav-small-cap">
-                        <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                        <span class="hide-menu fst-italic">Data Sender</span>
-                    </li>
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="{{ route('pelaksana.datakirimlaporan') }}" aria-expanded="false">
-                            <span>
-                                <i class="ti ti-send"></i>
-                            </span>
-                            <span class="hide-menu">Kirim Laporan</span>
-                        </a>
-                    </li>
                 </ul>
             </nav>
             <!-- End Sidebar navigation -->
@@ -81,7 +69,6 @@
         <!-- End Sidebar scroll-->
     </aside>
 @endsection
-
 
 @section('content')
     <div class="container-fluid">
@@ -104,20 +91,10 @@
                     <div class="mb-3">
                         <label for="komponen" class="form-label">Masukkan Nama Komponen</label>
                         <input type="text" name="komponen" class="form-control" id="komponen" value="{{ old('komponen') }}">
-                        @error('komponen')
-                            <div class="alert alert-danger" role="alert">
-                                {{ $message }}
-                            </div>
-                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="jumlah" class="form-label">Masukkan Jumlah Komponen</label>
                         <input type="integer" name="jumlah" class="form-control" id="jumlah" value="{{ old('jumlah') }}">
-                        @error('jumlah')
-                            <div class="alert alert-danger" role="alert">
-                                {{ $message }}
-                            </div>
-                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="satuan" class="form-label">Masukkan Jenis satuan</label>
@@ -126,27 +103,12 @@
                             <option value="Unit">Unit</option>
                             <option value="Pcs">Pcs</option>
                         </select>  
-                        @error('satuan')
-                            <div class="alert alert-danger" role="alert">
-                                {{ $message }}
-                            </div>
-                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="keterangan" class="form-label">Masukkan Keterangan</label>
                         <input type="text" name="keterangan" class="form-control" id="keterangan" value="{{ old('keterangan') }}">
-                        @error('keterangan')
-                            <div class="alert alert-danger" role="alert">
-                                {{ $message }}
-                            </div>
-                        @enderror
                     </div>
                     <input type="hidden" name="laporan_id" value="{{ $laporan_id }}">
-                    @error('keterangan')
-                    <div class="alert alert-danger" role="alert">
-                        {{ $laporan_id }}
-                    </div>
-                @enderror
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>

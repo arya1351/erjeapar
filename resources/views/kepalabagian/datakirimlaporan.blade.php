@@ -1,4 +1,4 @@
-<title>Pelaksana-Data Laporan</title>
+<title>Kepala Bagian-Data Laporan</title>
 
 @extends('layouts.app')
 @section('sidebar')
@@ -8,10 +8,10 @@
         <div>
             <div class="brand-logo d-flex align-items-center justify-content-between mx-auto">
                 <div class="row py-4">
-                    <a href="{{ route('pelaksana.dashboard') }}" class="text-nowrap logo-img justify-content-center mx-auto">
+                    <a href="{{ route('kepalabagian.dashboard') }}" class="text-nowrap logo-img justify-content-center mx-auto">
                         <img src="{{ asset('templates') }}/src/assets/images/logos/logoRJ.png" width="180" alt="" />
                     </a>
-                    <a href="{{ route('pelaksana.dashboard') }}" class="fs-6 fw-bolder text-center text-black">
+                    <a href="{{ route('kepalabagian.dashboard') }}" class="fs-6 fw-bolder text-center text-black">
                         Monitoring Apar
                     </a>
                 </div>
@@ -26,8 +26,8 @@
                         <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
                         <span class="hide-menu fst-italic">Home</span>
                     </li>
-                    <li class="sidebar-item {{ Request::is('pelaksana/dashboard') ? 'active' : '' }}">
-                        <a class="sidebar-link" href="{{ route('pelaksana.dashboard') }}" aria-expanded="false">
+                    <li class="sidebar-item {{ Request::is('kepalabagian/dashboard') ? 'active' : '' }}">
+                        <a class="sidebar-link" href="{{ route('kepalabagian.dashboard') }}" aria-expanded="false">
                             <span>
                                 <i class="ti ti-layout-dashboard"></i>
                             </span>
@@ -39,7 +39,7 @@
                         <span class="hide-menu fst-italic">Data Master</span>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="{{ route('pelaksana.dataapar') }}" aria-expanded="false">
+                        <a class="sidebar-link" href="{{ route('kepalabagian.dataapar') }}" aria-expanded="false">
                             <span>
                                 <i class="ti ti-fire-extinguisher"></i>
                             </span>
@@ -47,7 +47,7 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="{{ route('pelaksana.datamapping') }}" aria-expanded="false">
+                        <a class="sidebar-link" href="{{ route('kepalabagian.datamapping') }}" aria-expanded="false">
                             <span>
                                 <i class="ti ti-building"></i>
                             </span>
@@ -55,7 +55,7 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="{{ route('pelaksana.datalaporan') }}" aria-expanded="false">
+                        <a class="sidebar-link" href="{{ route('kepalabagian.datalaporan') }}" aria-expanded="false">
                             <span>
                                 <i class="ti ti-article"></i>
                             </span>
@@ -67,7 +67,7 @@
                         <span class="hide-menu fst-italic">Data Sender</span>
                     </li>
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="{{ route('pelaksana.datakirimlaporan') }}" aria-expanded="false">
+                        <a class="sidebar-link" href="{{ route('kepalabagian.datakirimlaporan') }}" aria-expanded="false">
                             <span>
                                 <i class="ti ti-send"></i>
                             </span>
@@ -89,10 +89,10 @@
         <div class="container-fluid">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title fw-semibold mb-4">Forms</h5>
+                    <h5 class="card-title fw-semibold mb-4">Data Kirim Laporan</h5>
                     <div class="d-flex justify-content-end">
-                        <a type="button" href="{{ route('pelaksana.tambahlaporan') }}"
-                            class="btn btn-primary m-1 justify-content-end">Kirim Laporan</a>
+                        <a type="button" href="{{ route('kepalabagian.kirimlaporan') }}"
+                            class="btn btn-primary justify-content-end m-1">Kirim Laporan</a>
                     </div>
                     <div class="table-responsive">
                         <table class="table text-nowrap mb-0 align-middle">
@@ -102,44 +102,29 @@
                                         <h6 class="fw-semibold mb-0">No Urut</h6>
                                     </th>
                                     <th class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-0">Jenis Laporan</h6>
-                                    </th>
-                                    <th class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-0">Pembuat</h6>
-                                    </th>
-                                    <th class="border-bottom-0">
-                                        <h6 class="fw-semibold mb-0">Tanggal Pengajuan</h6>
+                                        <h6 class="fw-semibold mb-0">Kirim Laporan</h6>
                                     </th>
                                     <th class="border-bottom-0">
                                         <h6 class="fw-semibold mb-0">Aksi</h6>
                                     </th>
                                 </tr>
                             </thead>
-                            {{-- <tbody>
-                                @forelse ($laporans as $laporan)
+                            <tbody>
+                                @forelse ($filelaporans as $laporan)
                                 <tr>
                                     <td class="border-bottom-0">
-                                        <h6 class="fw-Bold mb-0 text-center">{{($laporans->currentPage() - 1) * $laporans  ->perPage() + $loop->iteration}}</h6>
+                                        <h6 class="fw-Bold mb-0 text-center">{{($filelaporans->currentPage() - 1) * $filelaporans  ->perPage() + $loop->iteration}}</h6>
                                     </td>
                                     <td class="border-bottom-0">
                                         <h6 class="fw-semibold mb-1 d-inline-block text-truncate"
-                                            style="max-width: 100px;">{{ $laporan->jenislaporan }}</h6>
+                                            style="max-width: 100px;">{{ $laporan->file_laporan }}</h6>
                                     </td>
-                                    <td class="border-bottom-0">
-                                        <p class="mb-0 fw-normal">{{ $laporan->pembuat }}</p>
-                                    </td>
-                                    <td class="border-bottom-0">
-                                        <p class="mb-0 fw-normal">{{ $laporan->tanggal_pengajuan }}</p>
-                                    </td>
+                                  
                                     <td class="border-bottom-0 d-inline-flex gap-1">
                                         <button type="button" class="btn btn-success" data-bs-toggle="modal"
                                             data-bs-target="#detailModal{{ $laporan->id }}">
                                             Detail
                                         </button>
-                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="">
-                                        Edit
-                                    </button>
                                     <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                     data-bs-target="#deleteModal{{ $laporan->id }}">
                                     Hapus
@@ -153,33 +138,16 @@
                                     <div class="modal-dialog modal-xl modal-dialog-scrollable"">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Detail Laporan - {{ $laporan->jenislaporan }}</h5>
+                                                <h5 class="modal-title" id="exampleModalLabel">Detail Laporan Yang Dikirim</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <p><strong>Pembuat:</strong> {{ $laporan->pembuat }}</p>
-                                                <p><strong>Tanggal Pengajuan:</strong> {{ $laporan->tanggal_pengajuan }}</p>
-                                                <p><strong>Komponen Terkait:</strong></p>
-                                                @if ($laporan->komponens->isNotEmpty())
-                                                    <ul>
-                                                        @foreach ($laporan->komponens as $komponen)
-                                                        <h5 class="modal-title py-2" id="exampleModalLabel">Detail Komponen Ke {{ $loop->iteration }}</h5>
-                                                            <p>Nama Komponen : {{ $komponen->komponen }}</p>
-                                                            <p>Jumlah Komponen : {{ $komponen->jumlah }} {{ $komponen->satuan }}</p>
-                                                            <p>Keterangan : {{ $komponen->keterangan }}</p>
-                                                            <button type="button" class="btn btn-danger px-2 fs-1"  data-bs-target="#modalhapuskomponen" data-bs-toggle="modal">Hapus</button>
-                                                        
-                                                            @endforeach
-                                                    </ul>
-                                                    
-                                                @else
-                                                    <p>Belum ada komponen yang terkait dengan laporan ini.</p>
-                                                @endif
+                                                <p><strong>Nama File :</strong> {{ $laporan->file_laporan }}</p>
+                                                <p><strong>Tanggal Pengajuan :</strong> {{ $laporan->created_at }}</p>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-Primary" onclick="window.location.href='{{ route('pelaksana.tambahkomponen', $laporan->id) }}'">Tambah Komponen</button>
-                                                <button type="button" class="btn btn-success" onclick="window.location.href='{{ route('pelaksana.cetaklaporan', $laporan->id) }}'">Print</button>
+                                                <button type="button" class="btn btn-success" onclick="window.location.href='{{ route('kepalabagian.showpdf', $laporan->id) }}'">Lihat PDF</button>
                                                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                                             </div>
                                         </div>
@@ -215,13 +183,13 @@
                                                     aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <p>Apa kamu yakin ingin menghapus Laporan dengan nomer apar
-                                                    {{ $laporan->id }}</p>
+                                                <p>Apa kamu yakin ingin menghapus Laporan dengan nomer laporan
+                                                    {{ $loop->iteration }}</p>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
                                                     data-bs-dismiss="modal">Close</button>
-                                                <form action="{{ route('laporans.destroy', $laporan->id) }}"
+                                                <form action="{{ route('filelaporans.destroy', $laporan->id) }}"
                                                     method="POST">
                                                     @csrf
                                                     @method('DELETE')
@@ -237,32 +205,9 @@
                 
                                 </div>
                                 @endforelse
-                            </tbody> --}}
+                            </tbody>
                         </table>
-                        {{-- {{ $laporans->links('vendor.pagination.bootstrap-5') }} --}}
-                    </div>
-
-                </div>
-            </div>
-
-
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            ...
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
+                        {{ $filelaporans->links('vendor.pagination.bootstrap-5') }}
                     </div>
                 </div>
             </div>

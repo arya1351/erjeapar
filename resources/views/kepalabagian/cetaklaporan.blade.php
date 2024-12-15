@@ -26,9 +26,10 @@
             width: 150px;
             height: auto;
         }
-        .company{
+
+        .company {
             justify-content: center;
-            margin:auto;
+            margin: auto;
         }
 
         .company-name {
@@ -40,7 +41,7 @@
         .company-address {
             font-size: 14px;
         }
-        
+
         table {
             width: 100%;
             border-collapse: collapse;
@@ -71,6 +72,7 @@
             float: left;
             width: 75%;
         }
+
         .parafrase {
             text-align: center;
             float: left;
@@ -100,7 +102,8 @@
             </div>
             <div class="company">
                 <div class="company-name">PT ERJE LONDON CHEMICAL</div>
-                <div class="company-address">Jl. Padat Karya Km. 1,9 Cukanggalih - Curug, Tangerang 15810 <br> Tel. 021 - 598 5123 Fax. 021 5984750</div>
+                <div class="company-address">Jl. Padat Karya Km. 1,9 Cukanggalih - Curug, Tangerang 15810 <br> Tel. 021
+                    - 598 5123 Fax. 021 5984750</div>
             </div>
         </div>
         <h1>Detail Laporan</h1>
@@ -148,10 +151,12 @@
         </table>
 
         <div class="row">
-            <div class="column">
-                <p class="column1"></p>
-                <h4></h4>
-            </div>
+            @if ($laporans->pembuat)
+                <div class="column">
+                    <p class="column1"><strong>Pembuat :</strong></p>
+                    <h4>( {{ $laporans->pembuat }} )</h4>
+                </div>
+            @endif
             <div class="column">
                 <p class="parafrase"><strong>Disetujui Oleh,</strong></p>
                 <p class="column1"><strong>Kepala Bagian :</strong></p>
